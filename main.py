@@ -11,6 +11,7 @@ while game:
         if e.type == pygame.QUIT:
             game = False
         window.fill((255, 255, 255))
+        window.blit(pygame.image.load('personagem_temporario.png'), (10, 10))
         pygame.display.update()
 
 pygame.quit()
