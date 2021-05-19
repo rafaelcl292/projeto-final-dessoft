@@ -11,7 +11,7 @@ while game:
         if e.type == pygame.QUIT:
             game = False
         window.fill((255, 255, 255))
-        sprite = pygame.image.load('personagem_temporario.png').convert_alpha()
+        sprite = pygame.image.load('personagem_temporario.2.png').convert_alpha()
         window.blit(sprite, (10, 10))
         pygame.display.update()
 
