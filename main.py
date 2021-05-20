@@ -12,7 +12,7 @@ while game:
             game = False
         window.fill((255, 255, 255))
         sprite = pygame.image.load('personagem_temporario.png').convert_alpha()
-        window.blit(sprite, (10, 10))
+        window.blit(sprite, (100, 100))
         pygame.display.update()
 
 pygame.quit()
