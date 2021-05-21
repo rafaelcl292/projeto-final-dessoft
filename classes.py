@@ -7,6 +7,10 @@ class Background():
         self.fase = 0
         self.posicao = 0
         self.velocidade = 0
+        self.tiles = {
+            'grama': pygame.transform.scale(pygame.image.load('tiles/grama.png'), (50, 50)),
+            'nuvem': pygame.transform.scale(pygame.image.load('tiles/nuvem.png'), (500, 500)),
+        }
         self.grama = pygame.transform.scale(pygame.image.load('tiles/grama.png'), (50, 50))
         fase1 = [
             [0]*100,  # y = 0
@@ -100,7 +104,7 @@ class Background():
 
     def load(self):
         self.posicao += self.velocidade
-        self.window.fill((69,179,224))
+        self.window.fill((255,255,255))
         for y, linha in enumerate(self.fases[self.fase]):
             for x, block_address in enumerate(linha):
                 block = self.block_address_index[self.fase][block_address]

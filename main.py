@@ -41,6 +41,7 @@ while game:
     background.load()
     # Personagem
     personagem.load()
+    window.blit(pygame.transform.scale(pygame.image.load('tiles/nuvem.png'), (500, 500)), (0, 0))
     # Update
     pygame.display.update()
     # Clock tick
