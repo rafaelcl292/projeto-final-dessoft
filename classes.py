@@ -115,11 +115,18 @@ class Background():
 class Personagem():
     def __init__(self, window):
         self.window = window
-        self.personagem = pygame.transform.scale(pygame.image.load('personagem_temporario.png'), (50, 100))
-        self.posicao = 550
+        self.altura = 100
+        self.largura = 50
+        self.personagem = pygame.transform.scale(pygame.image.load('personagem_temporario.png'), (self.largura, self.altura))
+        self.posicao_y = 550
+        self.posicao_x = 200
+        self.velocidade = 0
         self.pulando = False
         self.contador_pulo = 25
+        self.esquerda = False
+        self.direita = False
     
 
     def load(self):
-        self.window.blit(self.personagem, (200, self.posicao))
+        self.posicao_x += self.velocidade
+        self.window.blit(self.personagem, (self.posicao_x, self.posicao_y))
