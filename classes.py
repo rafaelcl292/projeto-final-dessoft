@@ -13,8 +13,8 @@ class Background():
             'nuvem': pygame.transform.scale(pygame.image.load('tiles/nuvem.png'), (500, 500)),
         }
         fase1 = [
-            [0]*100,  # y = 0
-            [0]*100,  # y = 50
+            [0, 2, 0] + [0]*97,  # y = 0
+            [0]*6 + [2] + [0]*93,  # y = 50
             [0]*100,  # y = 100
             [0]*100,  # y = 150
             [0]*100,  # y = 200
@@ -26,7 +26,7 @@ class Background():
             [0]*100,  # y = 500
             [0]*100,  # y = 550
             [0]*100,  # y = 600
-            [1]*5 + [0] + [1]*94,  # y = 650
+            [1]*5 + [0] + [1]*92 + [0, 1],  # y = 650
         ]
         fase2 = [
             [0]*100,  # y = 0
@@ -94,7 +94,7 @@ class Background():
         ]
         self.fases = [fase1, fase2, fase3, fase4, fase5]
         self.block_address_index = [
-            [None, self.tiles['grama']],  # fase 1
+            [None, self.tiles['grama'], self.tiles['nuvem']],  # fase 1
             [None],  # fase 2
             [None],  # fase 3
             [None],  # fase 4
