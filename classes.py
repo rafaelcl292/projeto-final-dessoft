@@ -9,9 +9,9 @@ class Background():
         self.velocidade = 0
         self.tiles = {
             'grama': pygame.transform.scale(pygame.image.load('tiles/grama.png'), (50, 50)),
+            'terra': pygame.transform.scale(pygame.image.load('tiles/terra.png'), (50, 50)),
             'nuvem': pygame.transform.scale(pygame.image.load('tiles/nuvem.png'), (500, 500)),
         }
-        self.grama = pygame.transform.scale(pygame.image.load('tiles/grama.png'), (50, 50))
         fase1 = [
             [0]*100,  # y = 0
             [0]*100,  # y = 50
@@ -94,7 +94,7 @@ class Background():
         ]
         self.fases = [fase1, fase2, fase3, fase4, fase5]
         self.block_address_index = [
-            [None, self.grama],  # fase 1
+            [None, self.tiles['grama']],  # fase 1
             [None],  # fase 2
             [None],  # fase 3
             [None],  # fase 4
