@@ -8,7 +8,7 @@ def calcula_vel_tela_movel(vel=8):
         background.velocidade = 0
     elif personagem.direita:
         if personagem.posicao_x > 500 - personagem.largura:
-            if -background.posicao < len(background.fases[background.fase][-1]) * 50 - w:
+            if -background.posicao < len(background.plano1[background.fase][-1]) * 50 - w:
                 personagem.velocidade = 0
                 background.velocidade = - vel
             else:
