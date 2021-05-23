@@ -3,7 +3,7 @@ import pygame
 
 
 def calcula_vel_tela_movel(vel=8):
-    if int(personagem.esquerda) - int(personagem.direita) == 0:
+    if personagem.direita == personagem.esquerda:
         personagem.velocidade = 0
         background.velocidade = 0
     elif personagem.direita:
