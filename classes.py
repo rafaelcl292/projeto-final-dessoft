@@ -11,6 +11,7 @@ class Background():
             'grama': pygame.transform.scale(pygame.image.load('tiles/grama.png'), (50, 50)),
             'terra': pygame.transform.scale(pygame.image.load('tiles/terra.png'), (50, 50)),
             'nuvem': pygame.transform.scale(pygame.image.load('tiles/nuvem.png'), (500, 500)),
+            'montanha': pygame.transform.scale(pygame.image.load('tiles/montanha.png'), (1200, 700)),
         }
         self.plano1 = [
             # fase 1
@@ -98,7 +99,7 @@ class Background():
         self.plano2 = [
             # fase 1
             [
-                [0, 2, 0, 0, 0]*2,  # y = 0
+                [3, 2, 0, 0, 0]*2,  # y = 0
                 [0]*10,  # y = 50
                 [0]*10,  # y = 100
                 [0]*10,  # y = 150
@@ -179,7 +180,7 @@ class Background():
             ],
         ]
         self.block_address_index = [
-            [None, self.tiles['grama'], self.tiles['nuvem']],  # fase 1
+            [None, self.tiles['grama'], self.tiles['nuvem'], self.tiles['montanha']],  # fase 1
             [None],  # fase 2
             [None],  # fase 3
             [None],  # fase 4
