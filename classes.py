@@ -186,6 +186,14 @@ class Background():
             [None],  # fase 4
             [None],  # fase 5
         ]
+        self.blocos_solidos = [
+            [1],  # fase 1
+            [],  # fase 2
+            [],  # fase 3
+            [],  # fase 4
+            [],  # fase 5
+
+        ]
     
 
     def load(self):
@@ -213,7 +221,8 @@ class Personagem():
         self.personagem = pygame.transform.scale(pygame.image.load('personagem_temporario.png'), (self.largura, self.altura))
         self.posicao_y = 550
         self.posicao_x = 200
-        self.velocidade = 0
+        self.velocidade_x = 0
+        self.velocidade_y = 0
         self.pulando = False
         self.contador_pulo = 25
         self.esquerda = False
@@ -221,5 +230,5 @@ class Personagem():
     
 
     def load(self):
-        self.posicao_x += self.velocidade
+        self.posicao_x += self.velocidade_x
         self.window.blit(self.personagem, (self.posicao_x, self.posicao_y))

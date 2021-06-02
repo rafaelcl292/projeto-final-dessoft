@@ -4,38 +4,51 @@ import pygame
 
 def calcula_vel_tela_movel(vel=8):
     if personagem.direita == personagem.esquerda:
-        personagem.velocidade = 0
+        personagem.velocidade_x = 0
         background.velocidade = 0
     elif personagem.direita:
         if personagem.posicao_x > 500 - personagem.largura:
             if -background.posicao < len(background.plano1[background.fase][-1]) * 50 - w:
-                personagem.velocidade = 0
+                personagem.velocidade_x = 0
                 background.velocidade = - vel
             else:
                 if personagem.posicao_x < w - personagem.largura:
-                    personagem.velocidade = vel
+                    personagem.velocidade_x = vel
                     background.velocidade = 0
                 else:
-                    personagem.velocidade = 0
+                    personagem.velocidade_x = 0
                     background.velocidade = 0
         else:
-            personagem.velocidade = vel
+            personagem.velocidade_x = vel
             background.velocidade = 0
     elif personagem.esquerda:
         if 50 > personagem.posicao_x:
             if background.posicao < 0:
-                personagem.velocidade = 0
+                personagem.velocidade_x = 0
                 background.velocidade = vel
             else:
                 if 0 < personagem.posicao_x:
-                    personagem.velocidade = - vel
+                    personagem.velocidade_x = - vel
                     background.velocidade = 0
                 else:
-                    personagem.velocidade = 0
+                    personagem.velocidade_x = 0
                     background.velocidade = 0
         else:
-            personagem.velocidade = - vel
+            personagem.velocidade_x = - vel
             background.velocidade = 0
+
+
+def verifica_colisoes():
+    x = 0
+    y = 0
+    for linha in background.plano1[background.fase]:
+        for bloco in linha:
+            if bloco in background.blocos_solidos[background.fase]:
+                # print(x, y, personagem.posicao_x, personagem.posicao_y)
+                pass
+            x += 50
+        x = 0
+        y += 50
 
 
 pygame.init()
@@ -77,6 +90,7 @@ while game:
             personagem.pulando = False
             personagem.contador_pulo = 25
     calcula_vel_tela_movel()
+    verifica_colisoes()
     # Background
     background.load()
     # Personagem
