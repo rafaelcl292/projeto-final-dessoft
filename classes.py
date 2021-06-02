@@ -98,92 +98,10 @@ class Background():
                 [0]*100,  # y = 650
             ],
         ]
-        self.plano2 = [
-            # fase 1
-            [
-                [3] + [0]*9,  # y = 0
-                [0]*10,  # y = 50
-                [0]*10,  # y = 100
-                [0]*10,  # y = 150
-                [0]*10,  # y = 200
-                [0]*10,  # y = 250
-                [0]*10,  # y = 300
-                [0]*10,  # y = 350
-                [0]*10,  # y = 400
-                [0]*10,  # y = 450
-                [0]*10,  # y = 500
-                [0]*10,  # y = 550
-                [0]*10,  # y = 600
-                [0]*10,  # y = 650
-            ],[
-                # fase 2
-                [2] + [0]*9,  # y = 0
-                [0]*10,  # y = 50
-                [0]*10,  # y = 100
-                [0]*10,  # y = 150
-                [0]*10,  # y = 200
-                [0]*10,  # y = 250
-                [0]*10,  # y = 300
-                [0]*10,  # y = 350
-                [0]*10,  # y = 400
-                [0]*10,  # y = 450
-                [0]*10,  # y = 500
-                [0]*10,  # y = 550
-                [0]*10,  # y = 600
-                [0]*10,  # y = 650
-            ],[
-                # fase 3
-                [0]*10,  # y = 0
-                [0]*10,  # y = 50
-                [0]*10,  # y = 100
-                [0]*10,  # y = 150
-                [0]*10,  # y = 200
-                [0]*10,  # y = 250
-                [0]*10,  # y = 300
-                [0]*10,  # y = 350
-                [0]*10,  # y = 400
-                [0]*10,  # y = 450
-                [0]*10,  # y = 500
-                [0]*10,  # y = 550
-                [0]*10,  # y = 600
-                [0]*10,  # y = 650
-            ],[
-                # fase 4
-                [0]*10,  # y = 0
-                [0]*10,  # y = 50
-                [0]*10,  # y = 100
-                [0]*10,  # y = 150
-                [0]*10,  # y = 200
-                [0]*10,  # y = 250
-                [0]*10,  # y = 300
-                [0]*10,  # y = 350
-                [0]*10,  # y = 400
-                [0]*10,  # y = 450
-                [0]*10,  # y = 500
-                [0]*10,  # y = 550
-                [0]*10,  # y = 600
-                [0]*10,  # y = 650
-            ],[
-                # fase 5
-                [0]*10,  # y = 0
-                [0]*10,  # y = 50
-                [0]*10,  # y = 100
-                [0]*10,  # y = 150
-                [0]*10,  # y = 200
-                [0]*10,  # y = 250
-                [0]*10,  # y = 300
-                [0]*10,  # y = 350
-                [0]*10,  # y = 400
-                [0]*10,  # y = 450
-                [0]*10,  # y = 500
-                [0]*10,  # y = 550
-                [0]*10,  # y = 600
-                [0]*10,  # y = 650
-            ],
-        ]
+        self.plano2 = [self.tiles['montanha'], self.tiles['caverna']]
         self.block_address_index = [
-            [None, self.tiles['grama'], self.tiles['nuvem'], self.tiles['montanha']],  # fase 1
-            [None, self.tiles['pedra'], self.tiles['caverna']],  # fase 2
+            [None, self.tiles['grama'], self.tiles['nuvem']],  # fase 1
+            [None, self.tiles['pedra']],  # fase 2
             [None],  # fase 3
             [None],  # fase 4
             [None],  # fase 5
@@ -202,11 +120,7 @@ class Background():
         self.posicao += self.velocidade
         self.window.fill((255,255,255))
         # segundo plano
-        for y, linha in enumerate(self.plano2[self.fase]):
-            for x, block_address in enumerate(linha):
-                block = self.block_address_index[self.fase][block_address]
-                if block_address != 0:
-                    self.window.blit(block, (x*50 + self.posicao * 0.1, y*50))
+        self.window.blit(self.plano2[self.fase], (self.posicao * 0.1, 0))
         # primeiro plano
         for y, linha in enumerate(self.plano1[self.fase]):
             for x, block_address in enumerate(linha):
