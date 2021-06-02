@@ -91,6 +91,16 @@ while game:
             personagem.contador_pulo = 25
     calcula_vel_tela_movel()
     verifica_colisoes()
+
+    # Carrega fases
+    if personagem.posicao_x >= 1100 - personagem.largura:
+        background.fase = 1
+        personagem.pulando = False
+        personagem.contador_pulo = 25
+        personagem.posicao_y = 550
+        personagem.posicao_x = 200
+        background.posicao = 0
+    
     # Background
     background.load()
     # Personagem

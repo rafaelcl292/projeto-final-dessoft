@@ -11,7 +11,9 @@ class Background():
             'grama': pygame.transform.scale(pygame.image.load('tiles/grama.png'), (50, 50)),
             'terra': pygame.transform.scale(pygame.image.load('tiles/terra.png'), (50, 50)),
             'nuvem': pygame.transform.scale(pygame.image.load('tiles/nuvem.png'), (500, 500)),
-            'montanha': pygame.transform.scale(pygame.image.load('tiles/montanha.png'), (1200, 700)),
+            'montanha': pygame.transform.scale(pygame.image.load('tiles/montanha.png'), (1500, 700)),
+            'pedra': pygame.transform.scale(pygame.image.load('tiles/pedra.png'), (50, 50)),
+            'caverna': pygame.transform.scale(pygame.image.load('tiles/fundo_caverna.png'), (1500, 700))
         }
         self.plano1 = [
             # fase 1
@@ -45,7 +47,7 @@ class Background():
                 [0]*100,  # y = 500
                 [0]*100,  # y = 550
                 [0]*100,  # y = 600
-                [0]*100,  # y = 650
+                [1]*100,  # y = 650
             ],[
                 # fase 3
                 [0]*100,  # y = 0
@@ -99,7 +101,7 @@ class Background():
         self.plano2 = [
             # fase 1
             [
-                [3, 2, 0, 0, 0]*2,  # y = 0
+                [3] + [0]*9,  # y = 0
                 [0]*10,  # y = 50
                 [0]*10,  # y = 100
                 [0]*10,  # y = 150
@@ -115,7 +117,7 @@ class Background():
                 [0]*10,  # y = 650
             ],[
                 # fase 2
-                [0]*10,  # y = 0
+                [2] + [0]*9,  # y = 0
                 [0]*10,  # y = 50
                 [0]*10,  # y = 100
                 [0]*10,  # y = 150
@@ -181,7 +183,7 @@ class Background():
         ]
         self.block_address_index = [
             [None, self.tiles['grama'], self.tiles['nuvem'], self.tiles['montanha']],  # fase 1
-            [None],  # fase 2
+            [None, self.tiles['pedra'], self.tiles['caverna']],  # fase 2
             [None],  # fase 3
             [None],  # fase 4
             [None],  # fase 5
