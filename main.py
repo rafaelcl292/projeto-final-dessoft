@@ -94,7 +94,7 @@ while game:
 
     # Carrega fases
     if personagem.posicao_x >= 1100 - personagem.largura:
-        background.fase = 1
+        background.fase += 1
         personagem.pulando = False
         personagem.contador_pulo = 25
         personagem.posicao_y = 550
