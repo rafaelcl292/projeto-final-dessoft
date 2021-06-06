@@ -45,7 +45,28 @@ def verifica_colisoes():
         for bloco in linha:
             if bloco in background.blocos_solidos[background.fase]:
                 # print(x, y, personagem.posicao_x, personagem.posicao_y)
-                pass
+                parede = pygame.Rect(x + background.posicao, y, 50, 50)
+                player = pygame.Rect(personagem.posicao_x, personagem.posicao_y, personagem.largura, personagem.altura)
+                if player.colliderect(parede):
+                    collision_tolerance = 10
+                    # colisão teto
+                    if abs(player.top - parede.bottom) < collision_tolerance:
+                        print('colisão cima')
+                    # colisão chão
+                    if abs(player.bottom - parede.top) < collision_tolerance:
+                        print('colisão baixo')
+                    # colisão direita
+                    if abs(player.right - parede.left) < collision_tolerance:
+                        # print('colisão direita')
+                        if personagem.direita:
+                            personagem.velocidade_x = 0
+                            background.velocidade = 0
+                    # colisão esquerda
+                    if abs(player.left - parede.right) < collision_tolerance:
+                        # print('colisão esquerda')
+                        if personagem.esquerda:
+                            personagem.velocidade_x = 0
+                            background.velocidade = 0
             x += 50
         x = 0
         y += 50
@@ -105,6 +126,8 @@ while game:
     background.load()
     # Personagem
     personagem.load()
+    # pygame.draw.rect(window, (255,0,0), pygame.Rect(personagem.posicao_x, personagem.posicao_y, personagem.largura, personagem.altura))
+    pygame.draw.rect(window, (255,0,0), pygame.Rect(50 + background.posicao, 50*12, 50, 50))
     # Update
     pygame.display.update()
     # Clock tick
