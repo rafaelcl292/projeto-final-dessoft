@@ -78,6 +78,10 @@ clock = pygame.time.Clock()
 background = classes.Background(window)
 personagem = classes.Personagem(window)
 
+# Tela de início
+background.tela_inicio()
+
+# Jogo
 while background.game:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
