@@ -175,7 +175,7 @@ class Personagem():
         self.window = window
         self.altura = 100
         self.largura = 50
-        self.personagem = pygame.transform.scale(pygame.image.load('personagem_temporario.png'), (self.largura, self.altura))
+        self.personagem = pygame.transform.scale(pygame.image.load('player_parado.png'), (self.largura, self.altura))
         self.posicao_y = 500
         self.posicao_x = 200
         self.velocidade_x = 0
