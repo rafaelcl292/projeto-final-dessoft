@@ -132,6 +132,7 @@ class Background():
     
 
     def game_over(self):
+        # implemantar música de game over
         time.sleep(5)
         # fazer tela de game over
         self.game = False
