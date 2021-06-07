@@ -48,7 +48,7 @@ def verifica_colisoes():
                 parede = pygame.Rect(x + background.posicao, y, 50, 50)
                 player_atual = pygame.Rect(personagem.posicao_x, personagem.posicao_y, personagem.largura, personagem.altura)
                 player_futuro_y = pygame.Rect(personagem.posicao_x, personagem.posicao_y + personagem.velocidade_y, personagem.largura, personagem.altura)
-                player_futuro_x = pygame.Rect(personagem.posicao_x + personagem.velocidade_x, personagem.posicao_y, personagem.largura, personagem.altura)
+                player_futuro_x = pygame.Rect(personagem.posicao_x + personagem.velocidade_x - background.velocidade, personagem.posicao_y, personagem.largura, personagem.altura)
                 # colisões no eixo x
                 if player_futuro_x.colliderect(parede):
                     personagem.velocidade_x = 0
