@@ -141,6 +141,7 @@ class Background():
 
     def tela_inicio(self):
         # fazer tela de início com instrucões básicas de jogo
+        
         # aperte enter para começar
         for event in pygame.event.get():
             if event.key == pygame.K_RETURN:
