@@ -12,7 +12,7 @@ class Background():
             'grama': pygame.transform.scale(pygame.image.load('tiles/grama.png'), (50, 50)),
             'terra': pygame.transform.scale(pygame.image.load('tiles/terra.png'), (50, 50)),
             'nuvem': pygame.transform.scale(pygame.image.load('tiles/nuvem.png'), (500, 500)),
-            'montanha': pygame.transform.scale(pygame.image.load('tiles/montanha.png'), (2400, 700)),
+            'montanha': pygame.transform.scale(pygame.image.load('tiles/montanha_nuvens.png'), (2400, 700)),
             'pedra': pygame.transform.scale(pygame.image.load('tiles/pedra.png'), (50, 50)),
             'caverna': pygame.transform.scale(pygame.image.load('tiles/fundo_caverna.png'), (2400, 700))
         }
