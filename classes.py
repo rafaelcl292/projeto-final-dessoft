@@ -1,4 +1,5 @@
 import pygame
+from pygame import time
 
 
 class Background():
@@ -100,7 +101,7 @@ class Background():
         ]
         self.plano2 = [self.tiles['montanha'], self.tiles['caverna']]
         self.block_address_index = [
-            [None, self.tiles['grama'], self.tiles['nuvem']],  # fase 1
+            [None, self.tiles['grama'], self.tiles['terra']],  # fase 1
             [None, self.tiles['pedra']],  # fase 2
             [None],  # fase 3
             [None],  # fase 4
@@ -114,6 +115,7 @@ class Background():
             [],  # fase 5
 
         ]
+        self.game = True
     
 
     def load(self):
@@ -127,6 +129,12 @@ class Background():
                 block = self.block_address_index[self.fase][block_address]
                 if block_address != 0:
                     self.window.blit(block, (x*50 + self.posicao, y*50))
+    
+
+    def game_over(self):
+        time.sleep(5)
+        # fazer tela de game over
+        self.game = False
 
 
 class Personagem():
@@ -141,6 +149,7 @@ class Personagem():
         self.velocidade_y = 0
         self.esquerda = False
         self.direita = False
+        self.pulando = False
     
 
     def load(self):

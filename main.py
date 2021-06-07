@@ -1,5 +1,6 @@
 import classes
 import pygame
+import time
 
 
 def calcula_vel_tela_movel(vel=10):
@@ -61,6 +62,8 @@ def verifica_colisoes():
                     # colisao baixo
                     elif personagem.velocidade_y > 0:
                         personagem.velocidade_y = parede.top - player_atual.bottom
+                        if personagem.pulando:
+                            personagem.velocidade_y = -20
             x += 50
         x = 0
         y += 50
@@ -75,11 +78,10 @@ clock = pygame.time.Clock()
 background = classes.Background(window)
 personagem = classes.Personagem(window)
 
-game = True
-while game:
+while background.game:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            game = False
+            background.game = False
         # Movimentos no eixo X
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT or event.key == pygame.K_a:
@@ -96,8 +98,10 @@ while game:
         # Movimentos no eixo Y
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE or event.key == pygame.K_UP or event.key == pygame.K_w:
-                if personagem.velocidade_y == 0:
-                    personagem.velocidade_y = -20
+                personagem.pulando = True
+        elif event.type == pygame.KEYUP:
+            if event.key == pygame.K_SPACE or event.key == pygame.K_UP or event.key == pygame.K_w:
+                personagem.pulando = False
 
     calcula_vel_tela_movel()
     verifica_colisoes()
@@ -108,6 +112,9 @@ while game:
         personagem.posicao_y = 550
         personagem.posicao_x = 200
         background.posicao = 0
+        personagem.velocidade_y = 0
+        personagem.velocidade_x = 0
+        background.velocidade = 0
     # Background
     background.load()
     # Personagem
