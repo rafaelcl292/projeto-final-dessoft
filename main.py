@@ -2,7 +2,7 @@ import classes
 import pygame
 
 
-def calcula_vel_tela_movel(vel=8):
+def calcula_vel_tela_movel(vel=10):
     if personagem.direita == personagem.esquerda:
         personagem.velocidade_x = 0
         background.velocidade = 0
@@ -97,7 +97,7 @@ while game:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE or event.key == pygame.K_UP or event.key == pygame.K_w:
                 if personagem.velocidade_y == 0:
-                    personagem.velocidade_y = -15
+                    personagem.velocidade_y = -20
 
     calcula_vel_tela_movel()
     verifica_colisoes()
