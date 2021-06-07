@@ -45,7 +45,6 @@ def verifica_colisoes():
     for linha in background.plano1[background.fase]:
         for bloco in linha:
             if bloco in background.blocos_solidos[background.fase]:
-                # print(x, y, personagem.posicao_x, personagem.posicao_y)
                 parede = pygame.Rect(x + background.posicao, y, 50, 50)
                 player_atual = pygame.Rect(personagem.posicao_x, personagem.posicao_y, personagem.largura, personagem.altura)
                 player_futuro_y = pygame.Rect(personagem.posicao_x, personagem.posicao_y + personagem.velocidade_y, personagem.largura, personagem.altura)
