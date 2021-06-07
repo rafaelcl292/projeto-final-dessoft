@@ -141,11 +141,33 @@ class Background():
 
     def tela_inicio(self):
         # fazer tela de início com instrucões básicas de jogo
+        self.window.fill((0, 0, 0))
+        pygame.font.init()
+        fonte = pygame.font.Font('Fonte.ttf', 32)
+
+        linha1 = fonte.render('Bem vindo ao jogo HEXBLADE!', 1, (255,255,255))
+        self.window.blit(linha1,(50,50))
+
+        linha2 = fonte.render('Use as setas ou WASD para se movimentar', 1, (255,255,255))
+        self.window.blit(linha2,(50, 150))
+
+        linha3 = fonte.render('Aperte Q para atacar', 1, (255,255,255))
+        self.window.blit(linha3,(50, 250))
+        
+        ultima_linha = fonte.render('Pressione ENTER para começar...', 1, (255,255,255))
+        self.window.blit(ultima_linha,(50,600))
+
+        pygame.display.update()
         
         # aperte enter para começar
-        for event in pygame.event.get():
-            if event.key == pygame.K_RETURN:
-                return
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    self.game = False
+                    return
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_RETURN:
+                        return
 
 
 class Personagem():
@@ -153,7 +175,7 @@ class Personagem():
         self.window = window
         self.altura = 100
         self.largura = 50
-        self.personagem = pygame.transform.scale(pygame.image.load('personagem_temporario.png'), (self.largura, self.altura))
+        self.personagem = pygame.transform.scale(pygame.image.load('player_parado.png'), (self.largura, self.altura))
         self.posicao_y = 500
         self.posicao_x = 200
         self.velocidade_x = 0
