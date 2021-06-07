@@ -108,7 +108,7 @@ class Background():
         ]
         self.blocos_solidos = [
             [1],  # fase 1
-            [],  # fase 2
+            [1],  # fase 2
             [],  # fase 3
             [],  # fase 4
             [],  # fase 5
