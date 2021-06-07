@@ -63,7 +63,7 @@ def verifica_colisoes():
                     elif personagem.velocidade_y > 0:
                         personagem.velocidade_y = parede.top - player_atual.bottom
                         if personagem.pulando:
-                            personagem.velocidade_y = -20
+                            personagem.velocidade_y = -18
             x += 50
         x = 0
         y += 50
