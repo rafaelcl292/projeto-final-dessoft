@@ -81,9 +81,17 @@ def verifica_colisoes():
             personagem.vidas -= 1
         # ataque X flecha
         if personagem.atacando and personagem.contador_ataque < 12:
-            ataque = pygame.Rect(personagem.posicao_x + 50, personagem.posicao_y, personagem.largura, personagem.altura)
+            ataque = pygame.Rect(personagem.posicao_x + 40, personagem.posicao_y, personagem.largura + 20, personagem.altura)
             if hitbox_flecha.colliderect(ataque):
-                inimigos.flechas.remove(flecha)
+                if flecha in inimigos.flechas:
+                    inimigos.flechas.remove(flecha)
+    # colisões com inimigos
+    for inimigo in inimigos.inimigos:
+        ataque = pygame.Rect(personagem.posicao_x + 40, personagem.posicao_y, personagem.largura + 20, personagem.altura)
+        hitbox_inimigo = pygame.Rect(inimigo[0] + background.posicao, inimigo[1], 50, 100)
+        # ataque X inimigo
+        if hitbox_inimigo.colliderect(ataque) and personagem.contador_ataque < 12 and personagem.atacando:
+            inimigos.inimigos.remove(inimigo)
 
 
 def reset_posicoes():
@@ -154,6 +162,8 @@ while background.game:
     if personagem.posicao_y > 700 or personagem.vidas <= 0:
         background.game_over()
         personagem.vidas = 3
+        inimigos.flechas = list()
+        inimigos.inimigos = inimigos.inimigos_iniciais
         reset_posicoes()
     # Background
     background.load()

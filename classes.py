@@ -179,13 +179,13 @@ class Personagem():
         self.posicao_x += self.velocidade_x
         self.posicao_y += self.velocidade_y
         if self.atacando:
-            if self.contador_ataque == 20:
+            if self.contador_ataque == 18:
                 self.atacando = False
                 self.contador_ataque = 0
             self.contador_ataque += 1
         if self.atacando and self.contador_ataque < 12:
-            pygame.draw.rect(self.window, (255, 0, 0), pygame.Rect(self.posicao_x + 100, self.posicao_y + 25, self.largura, self.altura/2))
-            pygame.draw.rect(self.window, (255, 0, 0), pygame.Rect(self.posicao_x, self.posicao_y, self.largura, self.altura))
+            pygame.draw.rect(self.window, (255, 0, 0), pygame.Rect(self.posicao_x + 40, self.posicao_y, self.largura + 20, self.altura))
+            pygame.draw.rect(self.window, (0, 255, 0), pygame.Rect(self.posicao_x, self.posicao_y, self.largura, self.altura))
         else:
             self.window.blit(self.personagem, (self.posicao_x, self.posicao_y))
     
@@ -198,10 +198,11 @@ class Personagem():
 class Inimigos():
     def __init__(self, window):
         self.window = window
-        self.inimigos = [
+        self.inimigos_iniciais = [
             (15*50, 10*50),
             (26*50, 6*50),
         ]
+        self.inimigos = self.inimigos_iniciais.copy()
         self.sprites1 = [
             pygame.transform.scale(pygame.image.load('sprites_inimigos/inimigo_arco_0.png'), (50, 100)),
             pygame.transform.scale(pygame.image.load('sprites_inimigos/inimigo_arco_1.png'), (50, 100)),
