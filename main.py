@@ -1,7 +1,5 @@
-from pygame import fastevent
 import classes
 import pygame
-import time
 
 
 def calcula_vel_tela_movel(vel=10):
