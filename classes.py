@@ -159,9 +159,9 @@ class Background():
 class Personagem():
     def __init__(self, window):
         self.window = window
-        self.altura = 100
-        self.largura = 40
-        self.personagem = pygame.transform.scale(pygame.image.load('sprites_player/player_parado.png'), (self.largura + 60, self.altura))
+        self.altura = 106
+        self.largura = 33
+        self.personagem = pygame.transform.scale(pygame.image.load('sprites_player/player_parado.png'), (100, 150))
         self.posicao_y = 500
         self.posicao_x = 200
         self.velocidade_x = 0
