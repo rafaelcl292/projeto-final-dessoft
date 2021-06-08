@@ -169,7 +169,7 @@ class Personagem():
         self.esquerda = False
         self.direita = False
         self.pulando = False
-        self.vidas = 5
+        self.vidas = 3
         self.vida = pygame.transform.scale(pygame.image.load('sprites_player/hart.png'), (50, 50))
     
 

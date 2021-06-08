@@ -64,12 +64,24 @@ def verifica_colisoes():
                         personagem.velocidade_y = parede.top - player_atual.bottom
                         if personagem.pulando:
                             personagem.velocidade_y = -18
+                # colisões com flechas
+                for flecha in inimigos.flechas:
+                    hitbox_flecha = pygame.Rect(flecha['x'] + background.posicao, flecha['y'], 72, 10)
+                    if hitbox_flecha.colliderect(parede):
+                        # remove flecha
+                        inimigos.flechas.remove(flecha)
             x += 50
         x = 0
         y += 50
-    # colisões com projéteis
-    # colisões com inimigos
-    # ataques a inimigos
+    # colisões player X flechas
+    for flecha in inimigos.flechas:
+        hitbox_flecha = pygame.Rect(flecha['x'] + background.posicao, flecha['y'], 72, 10)
+        if hitbox_flecha.colliderect(player_atual):
+            # remove flecha
+            inimigos.flechas.remove(flecha)
+            # subtrai 1 vida
+            personagem.vidas -= 1
+
 
 
 def reset_posicoes():
@@ -131,7 +143,7 @@ while background.game:
         background.fase += 1
         reset_posicoes()
     # Game Over
-    if personagem.posicao_y > 700:
+    if personagem.posicao_y > 700 or personagem.vidas <= 0:
         background.game_over()
         personagem.vidas = 3
         reset_posicoes()
