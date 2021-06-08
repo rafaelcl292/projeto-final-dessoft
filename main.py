@@ -1,3 +1,4 @@
+from pygame import fastevent
 import classes
 import pygame
 import time
@@ -69,6 +70,18 @@ def verifica_colisoes():
         y += 50
 
 
+def reset_posicoes():
+    personagem.posicao_y = 500
+    personagem.posicao_x = 200
+    background.posicao = 0
+    personagem.velocidade_y = 0
+    personagem.velocidade_x = 0
+    background.velocidade = 0
+    personagem.direita = False
+    personagem.esquerda = False
+    personagem.pulando = False
+
+
 pygame.init()
 w = 1200
 h = 700
@@ -113,12 +126,11 @@ while background.game:
     # Carrega fases
     if personagem.posicao_x >= 1100 - personagem.largura:
         background.fase += 1
-        personagem.posicao_y = 550
-        personagem.posicao_x = 200
-        background.posicao = 0
-        personagem.velocidade_y = 0
-        personagem.velocidade_x = 0
-        background.velocidade = 0
+        reset_posicoes()
+    # Game Over
+    if personagem.posicao_y > 700:
+        background.game_over()
+        reset_posicoes()
     # Background
     background.load()
     # Personagem
