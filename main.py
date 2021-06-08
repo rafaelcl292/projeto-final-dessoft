@@ -22,7 +22,7 @@ def calcula_vel_tela_movel(vel=10):
             personagem.velocidade_x = vel
             background.velocidade = 0
     elif personagem.esquerda:
-        if -17 > personagem.posicao_x:
+        if 0 > personagem.posicao_x:
             if background.posicao < 0:
                 personagem.velocidade_x = 0
                 background.velocidade = vel
