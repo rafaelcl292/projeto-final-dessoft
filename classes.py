@@ -209,3 +209,16 @@ class Personagem():
         self.posicao_x += self.velocidade_x
         self.posicao_y += self.velocidade_y
         self.window.blit(self.personagem, (self.posicao_x, self.posicao_y))
+
+
+class Inimigo():
+    def __init__(self):
+        pass
+
+
+class Flecha():
+    def __init__(self, posicao_x, posicao_y, direcao):
+        self.posicao_x = posicao_x
+        self.posicao_y = posicao_y
+        self.direcao = direcao
+        self.flecha = pygame.transform.scale(pygame.image.load('projeteis/flecha.png'), (50, 50))
