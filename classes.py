@@ -161,12 +161,23 @@ class Personagem():
         self.window = window
         self.altura = 106
         self.largura = 28
-        self.personagem = pygame.transform.scale(pygame.image.load('sprites_player/player_parado.png'), (100, 150))
+        self.personagem = {
+            'direita': {
+                'parado': pygame.transform.scale(pygame.image.load('sprites_player/player_parado.png'), (100, 150)),
+                'ataque 1': pygame.transform.scale(pygame.image.load('sprites_player/ataque_begin.png'), (100, 150)),
+                'ataque 2': pygame.transform.scale(pygame.image.load('sprites_player/ataque_end.png'), (100, 150)),
+            },
+            'esquerda': {
+                'parado': pygame.transform.flip(pygame.transform.scale(pygame.image.load('sprites_player/player_parado.png'), (100, 150)), True, False),
+                'ataque 1': pygame.transform.flip(pygame.transform.scale(pygame.image.load('sprites_player/ataque_begin.png'), (100, 150)), True, False),
+                'ataque 2': pygame.transform.flip(pygame.transform.scale(pygame.image.load('sprites_player/ataque_end.png'), (100, 150)), True, False),
+            }
+        }
         self.posicao_y = 500
         self.posicao_x = 200
         self.velocidade_x = 0
         self.velocidade_y = 0
-        self.direcao = 'direita'
+        self.direcao = ['direita', 'direita']
         self.esquerda = False
         self.direita = False
         self.pulando = False
@@ -178,9 +189,15 @@ class Personagem():
 
     def load(self):
         if self.velocidade_x > 0:
-            self.direcao = 'direita'
+            self.direcao[0] = self.direcao[1]
+            self.direcao[1] = 'direita'
         if self.velocidade_x < 0:
-            self.direcao = 'esquerda'
+            self.direcao[0] = self.direcao[1]
+            self.direcao[1] = 'esquerda'
+        if self.direcao[0] == 'direita' and self.direcao[1] == 'esquerda':
+            self.posicao_x += 0
+        if self.direcao[0] == 'esquerda' and self.direcao[1] == 'direita':
+            self.posicao_x -= 0
         self.posicao_x += self.velocidade_x
         self.posicao_y += self.velocidade_y
         if self.atacando:
@@ -189,10 +206,9 @@ class Personagem():
                 self.contador_ataque = 0
             self.contador_ataque += 1
         if self.atacando and self.contador_ataque < 12:
-            pygame.draw.rect(self.window, (255, 0, 0), pygame.Rect(self.posicao_x + 40, self.posicao_y, self.largura + 20, self.altura))
-            pygame.draw.rect(self.window, (0, 255, 0), pygame.Rect(self.posicao_x, self.posicao_y, self.largura, self.altura))
+            self.window.blit(self.personagem[self.direcao[1]]['ataque 1'], (self.posicao_x, self.posicao_y))
         else:
-            self.window.blit(self.personagem, (self.posicao_x, self.posicao_y))
+            self.window.blit(self.personagem[self.direcao[1]]['parado'], (self.posicao_x, self.posicao_y))
     
 
     def load_vidas(self):
