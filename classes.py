@@ -177,7 +177,8 @@ class Personagem():
         self.posicao_x = 200
         self.velocidade_x = 0
         self.velocidade_y = 0
-        self.direcao = ['direita', 'direita']
+        self.correcao_flip = 0
+        self.direcao = 'direita'
         self.esquerda = False
         self.direita = False
         self.pulando = False
@@ -189,15 +190,15 @@ class Personagem():
 
     def load(self):
         if self.velocidade_x > 0:
-            self.direcao[0] = self.direcao[1]
-            self.direcao[1] = 'direita'
+            if self.direcao == 'esquerda':
+                self.posicao_x += 25
+            self.direcao = 'direita'
+            self.correcao_flip = 0
         if self.velocidade_x < 0:
-            self.direcao[0] = self.direcao[1]
-            self.direcao[1] = 'esquerda'
-        if self.direcao[0] == 'direita' and self.direcao[1] == 'esquerda':
-            self.posicao_x += 0
-        if self.direcao[0] == 'esquerda' and self.direcao[1] == 'direita':
-            self.posicao_x -= 0
+            if self.direcao == 'direita':
+                self.posicao_x -= 25
+            self.direcao = 'esquerda'
+            self.correcao_flip = - 40
         self.posicao_x += self.velocidade_x
         self.posicao_y += self.velocidade_y
         if self.atacando:
@@ -206,9 +207,9 @@ class Personagem():
                 self.contador_ataque = 0
             self.contador_ataque += 1
         if self.atacando and self.contador_ataque < 12:
-            self.window.blit(self.personagem[self.direcao[1]]['ataque 1'], (self.posicao_x, self.posicao_y))
+            self.window.blit(self.personagem[self.direcao]['ataque 1'], (self.posicao_x, self.posicao_y))
         else:
-            self.window.blit(self.personagem[self.direcao[1]]['parado'], (self.posicao_x, self.posicao_y))
+            self.window.blit(self.personagem[self.direcao]['parado'], (self.posicao_x, self.posicao_y))
     
 
     def load_vidas(self):
