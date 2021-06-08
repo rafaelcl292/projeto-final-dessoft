@@ -22,7 +22,7 @@ def calcula_vel_tela_movel(vel=10):
             personagem.velocidade_x = vel
             background.velocidade = 0
     elif personagem.esquerda:
-        if 50 > personagem.posicao_x:
+        if -17 > personagem.posicao_x:
             if background.posicao < 0:
                 personagem.velocidade_x = 0
                 background.velocidade = vel
@@ -47,9 +47,9 @@ def verifica_colisoes():
         for bloco in linha:
             if bloco in background.blocos_solidos[background.fase]:
                 parede = pygame.Rect(x + background.posicao, y, 50, 50)
-                player_atual = pygame.Rect(personagem.posicao_x, personagem.posicao_y, personagem.largura, personagem.altura)
-                player_futuro_y = pygame.Rect(personagem.posicao_x, personagem.posicao_y + personagem.velocidade_y, personagem.largura, personagem.altura)
-                player_futuro_x = pygame.Rect(personagem.posicao_x + personagem.velocidade_x - background.velocidade, personagem.posicao_y, personagem.largura, personagem.altura)
+                player_atual = pygame.Rect(personagem.posicao_x + 20, personagem.posicao_y + 43, personagem.largura, personagem.altura)
+                player_futuro_y = pygame.Rect(personagem.posicao_x + 20, personagem.posicao_y + personagem.velocidade_y + 43, personagem.largura, personagem.altura)
+                player_futuro_x = pygame.Rect(personagem.posicao_x + personagem.velocidade_x - background.velocidade + 20, personagem.posicao_y + 43, personagem.largura, personagem.altura)
                 # colisões no eixo x (player X ambiente)
                 if player_futuro_x.colliderect(parede):
                     personagem.velocidade_x = 0
@@ -163,7 +163,7 @@ while background.game:
         background.game_over()
         personagem.vidas = 3
         inimigos.flechas = list()
-        inimigos.inimigos = inimigos.inimigos_iniciais
+        inimigos.inimigos = inimigos.inimigos_iniciais.copy()
         reset_posicoes()
     # Background
     background.load()
