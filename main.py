@@ -67,6 +67,8 @@ def verifica_colisoes():
                 # ambiente X flechas
                 for flecha in inimigos.flechas:
                     hitbox_flecha = pygame.Rect(flecha['x'] + background.posicao, flecha['y'], 72, 10)
+                    if hitbox_flecha.colliderect(parede):
+                        inimigos.flechas.remove(flecha)
             x += 50
         x = 0
         y += 50
