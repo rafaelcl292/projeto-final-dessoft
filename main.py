@@ -81,7 +81,7 @@ def verifica_colisoes():
             personagem.vidas -= 1
         # ataque X flecha
         if personagem.atacando and personagem.contador_ataque < 12:
-            ataque = pygame.Rect(personagem.posicao_x + 100, personagem.posicao_y + 25, personagem.largura, personagem.altura/2)
+            ataque = pygame.Rect(personagem.posicao_x + 50, personagem.posicao_y, personagem.largura, personagem.altura)
             if hitbox_flecha.colliderect(ataque):
                 inimigos.flechas.remove(flecha)
 

@@ -172,7 +172,7 @@ class Personagem():
         self.atacando = False
         self.contador_ataque = 0
         self.vidas = 3
-        self.vida = pygame.transform.scale(pygame.image.load('sprites_player/hart.png'), (50, 50))
+        self.vida = pygame.transform.scale(pygame.image.load('sprites_player/heart.png'), (50, 50))
     
 
     def load(self):
