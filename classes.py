@@ -10,10 +10,8 @@ class Background():
         self.tiles = {
             'grama': pygame.transform.scale(pygame.image.load('tiles/grama.png'), (50, 50)),
             'terra': pygame.transform.scale(pygame.image.load('tiles/terra.png'), (50, 50)),
-            'nuvem': pygame.transform.scale(pygame.image.load('tiles/nuvem.png'), (500, 500)),
             'chão caverna': pygame.transform.scale(pygame.image.load('tiles/chao_caverna.png'), (50, 50)),
             'montanha': pygame.transform.scale(pygame.image.load('tiles/montanha_nuvens.png'), (2400, 700)),
-            'pedra': pygame.transform.scale(pygame.image.load('tiles/pedra.png'), (50, 50)),
             'caverna': pygame.transform.scale(pygame.image.load('tiles/fundo_caverna.png'), (2400, 700))
         }
         self.plano1 = [
@@ -211,14 +209,70 @@ class Personagem():
         self.window.blit(self.personagem, (self.posicao_x, self.posicao_y))
 
 
-class Inimigo():
-    def __init__(self):
-        pass
+class Inimigos():
+    def __init__(self, window):
+        self.window = window
+        self.inimigos = [
+            (15*50, 10*50),
+            (26*50, 6*50),
+        ]
+        self.sprites1 = [
+            pygame.transform.scale(pygame.image.load('sprites_inimigos/inimigo_arco_0.png'), (50, 100)),
+            pygame.transform.scale(pygame.image.load('sprites_inimigos/inimigo_arco_1.png'), (50, 100)),
+        ]
+        self.sprites2 = [
+            pygame.transform.flip(self.sprites1[0], True, False),
+            pygame.transform.flip(self.sprites1[1], True, False),
+        ]
+        self.contador = 0
+        self.flechas = list()
+    
+
+    def flecha(self, direcao):
+        if direcao:
+            return pygame.transform.scale(pygame.image.load('projeteis/flecha_inimigo.png'), (72, 10))
+        return pygame.transform.flip(pygame.transform.scale(pygame.image.load('projeteis/flecha_inimigo.png'), (72, 10)), True, False)
 
 
-class Flecha():
-    def __init__(self, posicao_x, posicao_y, direcao):
-        self.posicao_x = posicao_x
-        self.posicao_y = posicao_y
-        self.direcao = direcao
-        self.flecha = pygame.transform.scale(pygame.image.load('projeteis/flecha.png'), (50, 50))
+    def load(self, background, personagem):
+        # load inimigos
+        for x, y in self.inimigos:
+            if x + background > personagem:
+                sprite = self.sprites2
+            else:
+                sprite = self.sprites1
+            if self.contador < 5:
+                self.window.blit(sprite[0], (x + background, y))
+            else:
+                self.window.blit(sprite[1], (x + background, y))
+        # load flechas
+        flechas = list()
+        for flecha in self.flechas:
+            flecha_atualizada = dict()
+            flecha_atualizada['x'] = flecha['x'] - (int(flecha['direcao']) * 2 - 1) * 8
+            flecha_atualizada['y'] = flecha['y']
+            flecha_atualizada['direcao'] = flecha['direcao']
+            flechas.append(flecha_atualizada)
+        self.flechas = flechas
+        for flecha in self.flechas:
+            self.window.blit(self.flecha(flecha['direcao']), (flecha['x'] + background, flecha['y']))
+        # remove flechas fora da tela
+        flechas_para_remover = []
+        for flecha in self.flechas:
+            if not (- 72 < flecha['x'] + background < 1200):
+                flechas_para_remover.append(flecha)
+        for flecha in flechas_para_remover:
+            self.flechas.remove(flecha)
+
+        self.contador += 0.25
+        if self.contador == 10:
+            self.contador = 0
+            # nova flecha
+            for x, y in self.inimigos:
+                self.flechas.append(
+                    {
+                        'direcao': x + background > personagem,
+                        'x': x - 36 if x + background > personagem else x + 14,
+                        'y': y + 22
+                    }
+                )

@@ -42,14 +42,14 @@ def verifica_colisoes():
     x = 0
     y = 0
     personagem.velocidade_y += 1
-    player_atual = pygame.Rect(personagem.posicao_x, personagem.posicao_y, personagem.largura, personagem.altura)
-    player_futuro_y = pygame.Rect(personagem.posicao_x, personagem.posicao_y + personagem.velocidade_y, personagem.largura, personagem.altura)
-    player_futuro_x = pygame.Rect(personagem.posicao_x + personagem.velocidade_x - background.velocidade, personagem.posicao_y, personagem.largura, personagem.altura)
     # colisões com o ambiente
     for linha in background.plano1[background.fase]:
         for bloco in linha:
             if bloco in background.blocos_solidos[background.fase]:
                 parede = pygame.Rect(x + background.posicao, y, 50, 50)
+                player_atual = pygame.Rect(personagem.posicao_x, personagem.posicao_y, personagem.largura, personagem.altura)
+                player_futuro_y = pygame.Rect(personagem.posicao_x, personagem.posicao_y + personagem.velocidade_y, personagem.largura, personagem.altura)
+                player_futuro_x = pygame.Rect(personagem.posicao_x + personagem.velocidade_x - background.velocidade, personagem.posicao_y, personagem.largura, personagem.altura)
                 # colisões no eixo x
                 if player_futuro_x.colliderect(parede):
                     personagem.velocidade_x = 0
@@ -92,6 +92,7 @@ clock = pygame.time.Clock()
 
 background = classes.Background(window)
 personagem = classes.Personagem(window)
+inimigos = classes.Inimigos(window)
 
 # Tela de início
 background.tela_inicio()
@@ -135,6 +136,8 @@ while background.game:
         reset_posicoes()
     # Background
     background.load()
+    # Inimigos
+    inimigos.load(background.posicao, personagem.posicao_x)
     # Personagem
     personagem.load()
     # Update
