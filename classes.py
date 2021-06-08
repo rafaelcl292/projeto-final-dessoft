@@ -169,12 +169,19 @@ class Personagem():
         self.esquerda = False
         self.direita = False
         self.pulando = False
+        self.vidas = 5
+        self.vida = pygame.transform.scale(pygame.image.load('sprites_player/hart.png'), (50, 50))
     
 
     def load(self):
         self.posicao_x += self.velocidade_x
         self.posicao_y += self.velocidade_y
         self.window.blit(self.personagem, (self.posicao_x, self.posicao_y))
+    
+
+    def load_vidas(self):
+        for i in range(self.vidas):
+            self.window.blit(self.vida, (50 + i * 75, 50))
 
 
 class Inimigos():

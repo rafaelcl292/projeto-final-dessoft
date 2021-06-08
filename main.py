@@ -133,6 +133,7 @@ while background.game:
     # Game Over
     if personagem.posicao_y > 700:
         background.game_over()
+        personagem.vidas = 3
         reset_posicoes()
     # Background
     background.load()
@@ -140,6 +141,8 @@ while background.game:
     inimigos.load(background.posicao, personagem.posicao_x)
     # Personagem
     personagem.load()
+    # Vidas
+    personagem.load_vidas()
     # Update
     pygame.display.update()
     # Clock tick
