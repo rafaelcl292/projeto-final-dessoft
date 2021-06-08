@@ -160,7 +160,7 @@ class Personagem():
     def __init__(self, window):
         self.window = window
         self.altura = 106
-        self.largura = 30
+        self.largura = 28
         self.personagem = pygame.transform.scale(pygame.image.load('sprites_player/player_parado.png'), (100, 150))
         self.posicao_y = 500
         self.posicao_x = 200
