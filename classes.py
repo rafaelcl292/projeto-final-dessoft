@@ -206,7 +206,7 @@ class Inimigos():
         self.inimigos_iniciais = [
             (15*50, 10*50),
             (26*50, 6*50),
-            (44*50, 10*50)
+            (44*50, 9*50)
         ]
         self.inimigos = self.inimigos_iniciais.copy()
         self.sprites1 = [
