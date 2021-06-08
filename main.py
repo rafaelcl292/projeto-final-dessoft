@@ -50,11 +50,11 @@ def verifica_colisoes():
                 player_atual = pygame.Rect(personagem.posicao_x, personagem.posicao_y, personagem.largura, personagem.altura)
                 player_futuro_y = pygame.Rect(personagem.posicao_x, personagem.posicao_y + personagem.velocidade_y, personagem.largura, personagem.altura)
                 player_futuro_x = pygame.Rect(personagem.posicao_x + personagem.velocidade_x - background.velocidade, personagem.posicao_y, personagem.largura, personagem.altura)
-                # colisões no eixo x
+                # colisões no eixo x (player X ambiente)
                 if player_futuro_x.colliderect(parede):
                     personagem.velocidade_x = 0
                     background.velocidade = 0
-                # colisões no eixo y
+                # colisões no eixo y (player X ambiente)
                 if player_futuro_y.colliderect(parede):
                     # colisao cima
                     if personagem.velocidade_y < 0:
@@ -64,24 +64,24 @@ def verifica_colisoes():
                         personagem.velocidade_y = parede.top - player_atual.bottom
                         if personagem.pulando:
                             personagem.velocidade_y = -18
-                # colisões com flechas
+                # ambiente X flechas
                 for flecha in inimigos.flechas:
                     hitbox_flecha = pygame.Rect(flecha['x'] + background.posicao, flecha['y'], 72, 10)
-                    if hitbox_flecha.colliderect(parede):
-                        # remove flecha
-                        inimigos.flechas.remove(flecha)
             x += 50
         x = 0
         y += 50
-    # colisões player X flechas
+    # colisões com flechas
     for flecha in inimigos.flechas:
+        # player X flecha
         hitbox_flecha = pygame.Rect(flecha['x'] + background.posicao, flecha['y'], 72, 10)
         if hitbox_flecha.colliderect(player_atual):
-            # remove flecha
             inimigos.flechas.remove(flecha)
-            # subtrai 1 vida
             personagem.vidas -= 1
-
+        # ataque X flecha
+        if personagem.atacando and personagem.contador_ataque < 12:
+            ataque = pygame.Rect(personagem.posicao_x + 100, personagem.posicao_y + 25, personagem.largura, personagem.altura/2)
+            if hitbox_flecha.colliderect(ataque):
+                inimigos.flechas.remove(flecha)
 
 
 def reset_posicoes():
@@ -134,6 +134,12 @@ while background.game:
         elif event.type == pygame.KEYUP:
             if event.key == pygame.K_SPACE or event.key == pygame.K_UP or event.key == pygame.K_w:
                 personagem.pulando = False
+        
+        # Ataque
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_q:
+                personagem.atacando = True
+
 
     calcula_vel_tela_movel()
     verifica_colisoes()

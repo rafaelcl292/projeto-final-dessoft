@@ -169,6 +169,8 @@ class Personagem():
         self.esquerda = False
         self.direita = False
         self.pulando = False
+        self.atacando = False
+        self.contador_ataque = 0
         self.vidas = 3
         self.vida = pygame.transform.scale(pygame.image.load('sprites_player/hart.png'), (50, 50))
     
@@ -176,7 +178,16 @@ class Personagem():
     def load(self):
         self.posicao_x += self.velocidade_x
         self.posicao_y += self.velocidade_y
-        self.window.blit(self.personagem, (self.posicao_x, self.posicao_y))
+        if self.atacando:
+            if self.contador_ataque == 20:
+                self.atacando = False
+                self.contador_ataque = 0
+            self.contador_ataque += 1
+        if self.atacando and self.contador_ataque < 12:
+            pygame.draw.rect(self.window, (255, 0, 0), pygame.Rect(self.posicao_x + 100, self.posicao_y + 25, self.largura, self.altura/2))
+            pygame.draw.rect(self.window, (255, 0, 0), pygame.Rect(self.posicao_x, self.posicao_y, self.largura, self.altura))
+        else:
+            self.window.blit(self.personagem, (self.posicao_x, self.posicao_y))
     
 
     def load_vidas(self):
