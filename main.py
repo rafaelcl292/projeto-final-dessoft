@@ -157,13 +157,14 @@ while background.game:
     # Carrega fases
     if personagem.posicao_x >= 1100 - personagem.largura:
         background.fase += 1
+        inimigos.inimigos = inimigos.inimigos_iniciais[background.fase]
         reset_posicoes()
     # Game Over
     if personagem.posicao_y > 700 or personagem.vidas <= 0:
         background.game_over()
         personagem.vidas = 3
         inimigos.flechas = list()
-        inimigos.inimigos = inimigos.inimigos_iniciais.copy()
+        inimigos.inimigos = inimigos.inimigos_iniciais[background.fase]
         reset_posicoes()
     # Background
     background.load()
