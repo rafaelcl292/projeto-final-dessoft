@@ -157,17 +157,15 @@ class Personagem():
     def __init__(self, window):
         self.window = window
         self.altura = 106
-        self.largura = 28
+        self.largura = 30
         self.personagem = {
             'direita': {
-                'parado': pygame.transform.scale(pygame.image.load('sprites_player/player_parado.png'), (100, 150)),
-                'ataque 1': pygame.transform.scale(pygame.image.load('sprites_player/ataque_begin.png'), (100, 150)),
-                'ataque 2': pygame.transform.scale(pygame.image.load('sprites_player/ataque_end.png'), (100, 150)),
+                'parado': pygame.transform.scale(pygame.image.load('sprites_player/player_parado.png'), (130, 150)),
+                'ataque 2': pygame.transform.scale(pygame.image.load('sprites_player/ataque_end.png'), (130, 150)),
             },
             'esquerda': {
-                'parado': pygame.transform.flip(pygame.transform.scale(pygame.image.load('sprites_player/player_parado.png'), (100, 150)), True, False),
-                'ataque 1': pygame.transform.flip(pygame.transform.scale(pygame.image.load('sprites_player/ataque_begin.png'), (100, 150)), True, False),
-                'ataque 2': pygame.transform.flip(pygame.transform.scale(pygame.image.load('sprites_player/ataque_end.png'), (100, 150)), True, False),
+                'parado': pygame.transform.flip(pygame.transform.scale(pygame.image.load('sprites_player/player_parado.png'), (130, 150)), True, False),
+                'ataque 2': pygame.transform.flip(pygame.transform.scale(pygame.image.load('sprites_player/ataque_end.png'), (130, 150)), True, False),
             }
         }
         self.posicao_y = 500
@@ -188,15 +186,11 @@ class Personagem():
 
     def load(self):
         if self.velocidade_x > 0:
-            if self.direcao == 'esquerda':
-                self.posicao_x += 25
             self.direcao = 'direita'
             self.correcao_flip = 0
         if self.velocidade_x < 0:
-            if self.direcao == 'direita':
-                self.posicao_x -= 25
             self.direcao = 'esquerda'
-            self.correcao_flip = - 40
+            self.correcao_flip = - 60
         self.posicao_x += self.velocidade_x
         self.posicao_y += self.velocidade_y
         if self.atacando:
