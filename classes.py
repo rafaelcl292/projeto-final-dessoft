@@ -4,7 +4,7 @@ import pygame
 class Background():
     def __init__(self, window):
         self.window = window
-        self.fase = 0
+        self.fase = 1
         self.posicao = 0
         self.velocidade = 0
         self.tiles = {
