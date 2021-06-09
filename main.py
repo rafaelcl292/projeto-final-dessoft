@@ -175,7 +175,7 @@ while background.game:
     # Vidas
     personagem.load_vidas()
     # Update
-    pygame.draw.rect(window, (255, 0 , 0), pygame.Rect(personagem.posicao_x + 40 + personagem.correcao_flip*3/4, personagem.posicao_y, personagem.largura + 20, personagem.altura))
+    # pygame.draw.rect(window, (255, 0 , 0), pygame.Rect(personagem.posicao_x + 40 + personagem.correcao_flip*3/4, personagem.posicao_y, personagem.largura + 20, personagem.altura))
     pygame.display.update()
     # Clock tick
     clock.tick(30)
