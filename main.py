@@ -47,9 +47,9 @@ def verifica_colisoes():
         for bloco in linha:
             if bloco in background.blocos_solidos[background.fase]:
                 parede = pygame.Rect(x + background.posicao, y, 50, 50)
-                player_atual = pygame.Rect(personagem.posicao_x + 17 - personagem.correcao_flip, personagem.posicao_y + 43, personagem.largura, personagem.altura)
-                player_futuro_y = pygame.Rect(personagem.posicao_x + 17 - personagem.correcao_flip, personagem.posicao_y + personagem.velocidade_y + 43, personagem.largura, personagem.altura)
-                player_futuro_x = pygame.Rect(personagem.posicao_x + personagem.velocidade_x - background.velocidade + 17 - personagem.correcao_flip, personagem.posicao_y + 43, personagem.largura, personagem.altura)
+                player_atual = pygame.Rect(personagem.posicao_x + 50, personagem.posicao_y + 43, personagem.largura, personagem.altura)
+                player_futuro_y = pygame.Rect(personagem.posicao_x + 50, personagem.posicao_y + personagem.velocidade_y + 43, personagem.largura, personagem.altura)
+                player_futuro_x = pygame.Rect(personagem.posicao_x + personagem.velocidade_x - background.velocidade + 50, personagem.posicao_y + 43, personagem.largura, personagem.altura)
                 # colisões no eixo x (player X ambiente)
                 if player_futuro_x.colliderect(parede):
                     personagem.velocidade_x = 0
@@ -86,13 +86,13 @@ def verifica_colisoes():
             personagem.vidas -= 1
         # ataque X flecha
         if personagem.atacando and personagem.contador_ataque < 12:
-            ataque = pygame.Rect(personagem.posicao_x + 40 + personagem.correcao_flip*3/4, personagem.posicao_y, personagem.largura + 20, personagem.altura + 20)
+            ataque = pygame.Rect(personagem.posicao_x + 70 + personagem.correcao_flip, personagem.posicao_y, personagem.largura + 20, personagem.altura + 20)
             if hitbox_flecha.colliderect(ataque):
                 if flecha in inimigos.flechas:
                     inimigos.flechas.remove(flecha)
     # colisões com inimigos
     for inimigo in inimigos.inimigos:
-        ataque = pygame.Rect(personagem.posicao_x + 40 + personagem.correcao_flip*3/4, personagem.posicao_y, personagem.largura + 20, personagem.altura + 20)
+        ataque = pygame.Rect(personagem.posicao_x + 70 + personagem.correcao_flip, personagem.posicao_y, personagem.largura + 20, personagem.altura + 20)
         hitbox_inimigo = pygame.Rect(inimigo[0] + background.posicao, inimigo[1], 50, 100)
         # ataque X inimigo
         if hitbox_inimigo.colliderect(ataque) and personagem.contador_ataque < 12 and personagem.atacando:
@@ -106,7 +106,7 @@ def verifica_colisoes():
             personagem.vidas -= 1
     # colisões com magos
     for mago in magos.magos:
-        ataque = pygame.Rect(personagem.posicao_x + 40 + personagem.correcao_flip*3/4, personagem.posicao_y, personagem.largura + 20, personagem.altura + 20)
+        ataque = pygame.Rect(personagem.posicao_x + 70 + personagem.correcao_flip, personagem.posicao_y, personagem.largura + 20, personagem.altura + 20)
         hitbox_mago = pygame.Rect(mago[0] + background.posicao, mago[1], 50, 100)
         # ataque X mago
         if hitbox_mago.colliderect(ataque) and personagem.contador_ataque < 12 and personagem.atacando:
