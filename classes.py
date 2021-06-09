@@ -207,7 +207,7 @@ class Personagem():
                 self.contador_ataque = 0
             self.contador_ataque += 1
         if self.atacando and self.contador_ataque < 12:
-            self.window.blit(self.personagem[self.direcao]['ataque 1'], (self.posicao_x, self.posicao_y))
+            self.window.blit(self.personagem[self.direcao]['ataque 2'], (self.posicao_x, self.posicao_y))
         else:
             self.window.blit(self.personagem[self.direcao]['parado'], (self.posicao_x, self.posicao_y))
     
@@ -227,7 +227,7 @@ class Inimigos():
             (68*50, 10*50),
             (71*50, 6*50),
             (89*50, 11*50),
-            (92,*50, 8*50)
+            (92*50, 8*50)
         ]
         self.inimigos = self.inimigos_iniciais.copy()
         self.sprites1 = [
