@@ -5,7 +5,7 @@ import random
 class Background():
     def __init__(self, window):
         self.window = window
-        self.fase = 2
+        self.fase = 0
         self.posicao = 0
         self.velocidade = 0
         self.tiles = {
@@ -236,7 +236,7 @@ class Inimigos():
                 # (10*5, 6*50)
             ]
         ]
-        self.inimigos = self.inimigos_iniciais[2].copy()
+        self.inimigos = self.inimigos_iniciais[0].copy()
         self.sprites1 = [
             pygame.transform.scale(pygame.image.load('sprites_inimigos/inimigo_arco_0.png'), (50, 100)),
             pygame.transform.scale(pygame.image.load('sprites_inimigos/inimigo_arco_1.png'), (50, 100)),
@@ -320,7 +320,7 @@ class Magos():
 
             ]
         ]
-        self.magos = self.magos_iniciais[2].copy()
+        self.magos = self.magos_iniciais[0].copy()
         self.sprites1 = [
             pygame.transform.scale(pygame.image.load('sprites_inimigos/inimigo_mago_1.png'), (50, 100)),
             pygame.transform.scale(pygame.image.load('sprites_inimigos/inimigo_mago_0.png'), (50, 100)),

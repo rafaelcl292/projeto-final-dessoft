@@ -74,6 +74,16 @@ def verifica_colisoes():
                     hitbox_magia = pygame.Rect(magia['x'] + background.posicao, magia['y'], 46, 20)
                     if hitbox_magia.colliderect(parede):
                         magos.magias.remove(magia)
+                # ambiente X magia boss
+                for magia_boss in boss.projeteis:
+                    hitbox_magia_boss = pygame.Rect(magia_boss['x'] + background.posicao, magia_boss['y'], 60, 34)
+                    if hitbox_magia_boss.colliderect(parede):
+                        boss.projeteis.remove(magia_boss)
+                # ambiente X projetil boss
+                for projetil_boss in boss.projeteis2:
+                    hitbox_projetil_boss = pygame.Rect(projetil_boss['x'] + background.posicao, projetil_boss['y'], 30, 21)
+                    if hitbox_projetil_boss.colliderect(parede):
+                        boss.projeteis2.remove(projetil_boss)
             x += 50
         x = 0
         y += 50
@@ -111,6 +121,27 @@ def verifica_colisoes():
         # ataque X mago
         if hitbox_mago.colliderect(ataque) and personagem.contador_ataque < 12 and personagem.atacando:
             magos.magos.remove(mago)
+    # colisões com magia boss
+    for magia_boss in boss.projeteis:
+        # player X magia boss
+        hitbox_magia_boss = pygame.Rect(magia_boss['x'] + background.posicao, magia_boss['y'], 60, 34)
+        if hitbox_magia_boss.colliderect(player_atual):
+            boss.projeteis.remove(magia_boss)
+            personagem.vidas -= 1
+    # colisões com projetil boss
+    for projetil_boss in boss.projeteis2:
+        # player X flecha
+        hitbox_projetil_boss = pygame.Rect(projetil_boss['x'] + background.posicao, projetil_boss['y'], 30, 21)
+        if hitbox_projetil_boss.colliderect(player_atual):
+            boss.projeteis2.remove(projetil_boss)
+            personagem.vidas -= 1
+        # ataque X flecha
+        if personagem.atacando and personagem.contador_ataque < 12:
+            ataque = pygame.Rect(personagem.posicao_x + 70 + personagem.correcao_flip, personagem.posicao_y, personagem.largura + 20, personagem.altura + 20)
+            if hitbox_projetil_boss.colliderect(ataque):
+                if projetil_boss in boss.projeteis2:
+                    boss.projeteis2.remove(projetil_boss)
+
 
 
 def reset_posicoes():
