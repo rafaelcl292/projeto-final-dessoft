@@ -195,11 +195,12 @@ while background.game:
     # Inimigos
     inimigos.load(background.posicao, personagem.posicao_x)
     magos.load(background.posicao, personagem.posicao_x)
-    boss.load(background.fase)
+    boss.load(background.fase, personagem.posicao_x, background.posicao)
     # Personagem
     personagem.load()
     # Vidas
     personagem.load_vidas()
+    boss.load_vidas(background.fase)
     # Update
     pygame.display.update()
     # Clock tick
