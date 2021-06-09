@@ -168,7 +168,7 @@ while background.game:
         
         # Ataque
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
+            if event.key == pygame.K_SPACE or event.key == pygame.K_q:
                 personagem.atacando = True
 
 
