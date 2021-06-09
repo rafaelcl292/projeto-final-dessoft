@@ -130,7 +130,7 @@ class Background():
         pygame.font.init()
 
         fonte = pygame.font.Font('Fonte.ttf', 100)
-        linha1 = fonte.render('BEM VINDO AO JOGO HEXBLADE!', 1, (200, 0, 0))
+        linha1 = fonte.render('THIS IS IMPOSSIBLE!', 1, (200, 0, 0))
         self.window.blit(linha1,(50,50))
 
         fonte = pygame.font.Font('Fonte.ttf', 64)
@@ -138,7 +138,7 @@ class Background():
         self.window.blit(linha2, (50, 200))
         linha3 = fonte.render('APERTE ESPAÇO OU Q PARA ATACAR', 1, (255,255,255))
         self.window.blit(linha3, (50, 300))
-        ultima_linha = fonte.render('PRESSIONE ENTER PARA COMEÇAR...', 1, (255,255,255))
+        ultima_linha = fonte.render('QUER TENTAR? APERTE ENTER! MAS VOCÊ VAI PERDER...', 1, (255,255,255))
         self.window.blit(ultima_linha, (50, 600))
 
         pygame.display.update()
