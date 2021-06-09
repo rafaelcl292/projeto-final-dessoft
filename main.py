@@ -96,13 +96,13 @@ def verifica_colisoes():
             personagem.vidas -= 1
         # ataque X flecha
         if personagem.atacando and personagem.contador_ataque < 12:
-            ataque = pygame.Rect(personagem.posicao_x + 70 + personagem.correcao_flip, personagem.posicao_y, personagem.largura + 20, personagem.altura + 20)
+            ataque = pygame.Rect(personagem.posicao_x + 70 + personagem.correcao_flip, personagem.posicao_y, personagem.largura + 20, personagem.altura + 40)
             if hitbox_flecha.colliderect(ataque):
                 if flecha in inimigos.flechas:
                     inimigos.flechas.remove(flecha)
     # colisões com inimigos
     for inimigo in inimigos.inimigos:
-        ataque = pygame.Rect(personagem.posicao_x + 70 + personagem.correcao_flip, personagem.posicao_y, personagem.largura + 20, personagem.altura + 20)
+        ataque = pygame.Rect(personagem.posicao_x + 70 + personagem.correcao_flip, personagem.posicao_y, personagem.largura + 20, personagem.altura + 40)
         hitbox_inimigo = pygame.Rect(inimigo[0] + background.posicao, inimigo[1], 50, 100)
         # ataque X inimigo
         if hitbox_inimigo.colliderect(ataque) and personagem.contador_ataque < 12 and personagem.atacando:
@@ -116,7 +116,7 @@ def verifica_colisoes():
             personagem.vidas -= 1
     # colisões com magos
     for mago in magos.magos:
-        ataque = pygame.Rect(personagem.posicao_x + 70 + personagem.correcao_flip, personagem.posicao_y, personagem.largura + 20, personagem.altura + 20)
+        ataque = pygame.Rect(personagem.posicao_x + 70 + personagem.correcao_flip, personagem.posicao_y, personagem.largura + 20, personagem.altura + 40)
         hitbox_mago = pygame.Rect(mago[0] + background.posicao, mago[1], 50, 100)
         # ataque X mago
         if hitbox_mago.colliderect(ataque) and personagem.contador_ataque < 12 and personagem.atacando:
@@ -137,10 +137,28 @@ def verifica_colisoes():
             personagem.vidas -= 1
         # ataque X flecha
         if personagem.atacando and personagem.contador_ataque < 12:
-            ataque = pygame.Rect(personagem.posicao_x + 70 + personagem.correcao_flip, personagem.posicao_y, personagem.largura + 20, personagem.altura + 20)
+            ataque = pygame.Rect(personagem.posicao_x + 70 + personagem.correcao_flip, personagem.posicao_y, personagem.largura + 20, personagem.altura + 40)
             if hitbox_projetil_boss.colliderect(ataque):
                 if projetil_boss in boss.projeteis2:
                     boss.projeteis2.remove(projetil_boss)
+    # colisões com o boss
+    boss.contador_colisao_player += 1
+    boss.contador_colisao_boss += 1
+    if boss.teleportando == False:
+        ataque = pygame.Rect(personagem.posicao_x + 70 + personagem.correcao_flip, personagem.posicao_y, personagem.largura + 20, personagem.altura + 40)
+        hitbox_boss = pygame.Rect(boss.posicao_x + background.posicao - boss.correcao_teleporte + 180, boss.posicao_y + 50, 50, 120)
+        # player X boss
+        if hitbox_boss.colliderect(player_futuro_x):
+            personagem.velocidade_x = 0
+            background.velocidade = 0
+            if boss.contador_colisao_player > 20:
+                boss.contador_colisao_player = 0
+                personagem.vidas -= 1
+        # ataque X boss
+        if hitbox_boss.colliderect(ataque) and personagem.atacando:
+            if boss.contador_colisao_boss > 20:
+                boss.contador_colisao_boss = 0
+                boss.vidas -= 1
 
 
 
@@ -154,6 +172,10 @@ def reset_posicoes():
     personagem.direita = False
     personagem.esquerda = False
     personagem.pulando = False
+    boss.projeteis = []
+    boss.projeteis2 = []
+    inimigos.flechas = []
+    magos.magias = []
 
 
 pygame.init()
@@ -233,7 +255,10 @@ while background.game:
     personagem.load_vidas()
     boss.load_vidas(background.fase)
     # Update
+    if boss.teleportando == False:
+        pygame.draw.rect(window, (255, 0, 0), pygame.Rect(boss.posicao_x + background.posicao - boss.correcao_teleporte + 180, boss.posicao_y + 50, 50, 120))
     pygame.display.update()
+
     # Clock tick
     clock.tick(30)
 

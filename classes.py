@@ -5,7 +5,7 @@ import random
 class Background():
     def __init__(self, window):
         self.window = window
-        self.fase = 0
+        self.fase = 2
         self.posicao = 0
         self.velocidade = 0
         self.tiles = {
@@ -180,7 +180,7 @@ class Personagem():
         self.pulando = False
         self.atacando = False
         self.contador_ataque = 0
-        self.vidas = 3
+        self.vidas = 8
         self.vida = pygame.transform.scale(pygame.image.load('sprites_player/heart.png'), (50, 50))
         # self.som_espada = pygame.mixer.Sound('sons/espada_puxando.mp3')
     
@@ -236,7 +236,7 @@ class Inimigos():
                 # (10*5, 6*50)
             ]
         ]
-        self.inimigos = self.inimigos_iniciais[0].copy()
+        self.inimigos = self.inimigos_iniciais[2].copy()
         self.sprites1 = [
             pygame.transform.scale(pygame.image.load('sprites_inimigos/inimigo_arco_0.png'), (50, 100)),
             pygame.transform.scale(pygame.image.load('sprites_inimigos/inimigo_arco_1.png'), (50, 100)),
@@ -320,7 +320,7 @@ class Magos():
 
             ]
         ]
-        self.magos = self.magos_iniciais[0].copy()
+        self.magos = self.magos_iniciais[2].copy()
         self.sprites1 = [
             pygame.transform.scale(pygame.image.load('sprites_inimigos/inimigo_mago_1.png'), (50, 100)),
             pygame.transform.scale(pygame.image.load('sprites_inimigos/inimigo_mago_0.png'), (50, 100)),
@@ -394,14 +394,19 @@ class Boss():
         self.window = window
         self.ataque = ''
         self.atacando = False
+        self.teleportando = False
+        self.espetada = False
+        self.correcao_teleporte = 0
         self.contador = 0
+        self.contador_colisao_player = 0
+        self.contador_colisao_boss = 0
         self.largura = 40
         self.altura = 140
         self.posicao_x = 1200
         self.posicao_y = 450
         self.posicao_x_teleporte = 0
         self.vidas = 7
-        self.vida = pygame.transform.scale(pygame.image.load('sprites_player/heart.png'), (50, 50))
+        self.vida = pygame.transform.scale(pygame.image.load('sprites_boss_corrigido/heart_boss.png'), (50, 50))
         self.projeteis = list()
         self.projeteis2 = list()
         self.magia = pygame.transform.scale(pygame.image.load('sprites_boss_corrigido/magia_do_boss.png'), (60, 34))
@@ -511,6 +516,7 @@ class Boss():
                 if self.ataque == 'teleporte':
                     self.posicao_x_teleporte = self.posicao_x
                     self.posicao_x = [a for a in [400, 800, 1200] if a != self.posicao_x][random.randint(0, 1)]
+                    self.correcao_teleporte = self.posicao_x - self.posicao_x_teleporte
             else:
                 if self.ataque == 'espadada':
                     if self.contador < 90:
@@ -519,9 +525,11 @@ class Boss():
                         self.window.blit(self.get_sprite('boss telegraph', posicao_personagem, posicao_background, self.posicao_x), (self.posicao_x + posicao_background, self.posicao_y))
                     elif self.contador < 140:
                         if self.contador == 110:
+                            self.espetada = True
                             self.lancar_projetil2(posicao_background, posicao_personagem, self.posicao_x, self.posicao_y)
                         self.window.blit(self.get_sprite('boss ataque', posicao_personagem, posicao_background, self.posicao_x), (self.posicao_x + posicao_background, self.posicao_y))
                     else:
+                        self.espetada = False
                         self.contador = 0
                         self.atacando = False
                     self.contador += 1
@@ -545,13 +553,16 @@ class Boss():
                         self.window.blit(self.get_sprite('teleporte 1', posicao_personagem, posicao_background, self.posicao_x_teleporte), (self.posicao_x_teleporte + posicao_background, self.posicao_y))
                         self.window.blit(self.get_sprite('teleporte 3', posicao_personagem, posicao_background, self.posicao_x), (self.posicao_x + posicao_background, self.posicao_y))
                     elif self.contador < 150:
+                        if self.contador == 110:
+                            self.teleportando = True
                         self.window.blit(self.get_sprite('teleporte 2', posicao_personagem, posicao_background, self.posicao_x_teleporte), (self.posicao_x_teleporte + posicao_background, self.posicao_y))
                         self.window.blit(self.get_sprite('teleporte 2', posicao_personagem, posicao_background, self.posicao_x), (self.posicao_x + posicao_background, self.posicao_y))
-                    elif self.contador < 150:
+                    elif self.contador < 190:
+                        if self.contador == 150:
+                            self.teleportando = False
+                            self.correcao_teleporte = 0
                         self.window.blit(self.get_sprite('teleporte 3', posicao_personagem, posicao_background, self.posicao_x_teleporte), (self.posicao_x_teleporte + posicao_background, self.posicao_y))
                         self.window.blit(self.get_sprite('teleporte 1', posicao_personagem, posicao_background, self.posicao_x), (self.posicao_x + posicao_background, self.posicao_y))
-                    elif self.contador < 190:
-                        self.window.blit(self.get_sprite('boss parado', posicao_personagem, posicao_background, self.posicao_x), (self.posicao_x + posicao_background, self.posicao_y))
                     else:
                         self.window.blit(self.get_sprite('boss parado', posicao_personagem, posicao_background, self.posicao_x), (self.posicao_x + posicao_background, self.posicao_y))
                         self.contador = 0
