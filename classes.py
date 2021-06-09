@@ -1,4 +1,5 @@
 import pygame
+import random
 
 
 class Background():
@@ -133,9 +134,9 @@ class Background():
         self.window.blit(linha1,(50,50))
 
         fonte = pygame.font.Font('Fonte.ttf', 64)
-        linha2 = fonte.render('USE AS SETAS OU W A S D PARE SE MOVIMENTAR', 1, (255,255,255))
+        linha2 = fonte.render('USE AS SETAS OU W A S D PARA SE MOVIMENTAR', 1, (255,255,255))
         self.window.blit(linha2, (50, 200))
-        linha3 = fonte.render('APERTE ESPAÇO PARA ATACAR', 1, (255,255,255))
+        linha3 = fonte.render('APERTE ESPAÇO OU Q PARA ATACAR', 1, (255,255,255))
         self.window.blit(linha3, (50, 300))
         ultima_linha = fonte.render('PRESSIONE ENTER PARA COMEÇAR...', 1, (255,255,255))
         self.window.blit(ultima_linha, (50, 600))
