@@ -382,8 +382,20 @@ class Magos():
 class Boss():
     def __init__(self, window):
         self.window = window
+        self.posicao = 0
+        self.ataque = ''
+        self.atacando = False
+        self.contador = 0
     
 
     def load(self, fase):
         if fase == 3:
-            pass
+            if not self.atacando:
+                self.ataque = ['teleporte', 'magia', 'espadada'][random.randint(0, 2)]
+            else:
+                if self.ataque == 'teleporte':
+                    pass
+                elif self.ataque == 'magia':
+                    pass
+                elif self.ataque == 'espadada':
+                    pass
