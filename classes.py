@@ -382,3 +382,13 @@ class Magos():
                         'y': y + 30
                     }
                 )
+
+
+class Boss():
+    def __init__(self, window):
+        self.window = window
+    
+
+    def load(self, fase):
+        if fase == 3:
+            pass

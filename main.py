@@ -135,6 +135,7 @@ background = classes.Background(window)
 personagem = classes.Personagem(window)
 inimigos = classes.Inimigos(window)
 magos = classes.Magos(window)
+boss = classes.Boss(window)
 
 # Tela de início
 background.tela_inicio()
@@ -194,6 +195,7 @@ while background.game:
     # Inimigos
     inimigos.load(background.posicao, personagem.posicao_x)
     magos.load(background.posicao, personagem.posicao_x)
+    boss.load(background.fase)
     # Personagem
     personagem.load()
     # Vidas
