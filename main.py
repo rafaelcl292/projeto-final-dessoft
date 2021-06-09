@@ -154,11 +154,23 @@ def verifica_colisoes():
             if boss.contador_colisao_player > 20:
                 boss.contador_colisao_player = 0
                 personagem.vidas -= 1
+        if hitbox_boss.colliderect(player_futuro_y):
+            personagem.velocidade_y = hitbox_boss.top - player_atual.bottom
+            if boss.contador_colisao_player > 20:
+                boss.contador_colisao_player = 0
+                personagem.vidas -= 1
         # ataque X boss
         if hitbox_boss.colliderect(ataque) and personagem.atacando:
             if boss.contador_colisao_boss > 20:
                 boss.contador_colisao_boss = 0
                 boss.vidas -= 1
+        # ataque boss X player
+        if boss.espetada:
+            ataque_boss_hitbox = pygame.Rect(boss.posicao_x + background.posicao + 40, boss.posicao_y + 60, 360, 40)
+            if player_atual.colliderect(ataque_boss_hitbox):
+                if boss.contador_colisao_player > 20:
+                    boss.contador_colisao_player = 0
+                    personagem.vidas -= 1
 
 
 
@@ -255,10 +267,7 @@ while background.game:
     personagem.load_vidas()
     boss.load_vidas(background.fase)
     # Update
-    if boss.teleportando == False:
-        pygame.draw.rect(window, (255, 0, 0), pygame.Rect(boss.posicao_x + background.posicao - boss.correcao_teleporte + 180, boss.posicao_y + 50, 50, 120))
     pygame.display.update()
-
     # Clock tick
     clock.tick(30)
 

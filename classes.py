@@ -180,7 +180,7 @@ class Personagem():
         self.pulando = False
         self.atacando = False
         self.contador_ataque = 0
-        self.vidas = 8
+        self.vidas = 3
         self.vida = pygame.transform.scale(pygame.image.load('sprites_player/heart.png'), (50, 50))
         # self.som_espada = pygame.mixer.Sound('sons/espada_puxando.mp3')
     
@@ -236,7 +236,7 @@ class Inimigos():
                 # (10*5, 6*50)
             ]
         ]
-        self.inimigos = self.inimigos_iniciais[2].copy()
+        self.inimigos = self.inimigos_iniciais[0].copy()
         self.sprites1 = [
             pygame.transform.scale(pygame.image.load('sprites_inimigos/inimigo_arco_0.png'), (50, 100)),
             pygame.transform.scale(pygame.image.load('sprites_inimigos/inimigo_arco_1.png'), (50, 100)),
@@ -320,7 +320,7 @@ class Magos():
 
             ]
         ]
-        self.magos = self.magos_iniciais[2].copy()
+        self.magos = self.magos_iniciais[0].copy()
         self.sprites1 = [
             pygame.transform.scale(pygame.image.load('sprites_inimigos/inimigo_mago_1.png'), (50, 100)),
             pygame.transform.scale(pygame.image.load('sprites_inimigos/inimigo_mago_0.png'), (50, 100)),
@@ -452,8 +452,8 @@ class Boss():
     def lancar_projetil(self, background, personagem, x, y):
         self.projeteis.append(
             {
-                'direcao': x + background > personagem,
-                'x': x + 100 if x + background > personagem else x + 240,
+                'direcao': x + background + 200 > personagem,
+                'x': x + 100 if x + background + 200 > personagem else x + 240,
                 'y': y + 70,
             }
         )
@@ -481,8 +481,8 @@ class Boss():
     def lancar_projetil2(self, background, personagem, x, y):
         self.projeteis2.append(
             {
-                'direcao': x + background > personagem,
-                'x': x if x + background > personagem else x + 350,
+                'direcao': x + background + 200 > personagem,
+                'x': x if x + background + 200 > personagem else x + 350,
                 'y': y + 75,
             }
         )
