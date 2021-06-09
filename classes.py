@@ -138,7 +138,7 @@ class Background():
         fonte = pygame.font.Font('Fonte.ttf', 64)
         linha2 = fonte.render('USE AS SETAS OU WASD PARE SE MOVIMENTAR', 1, (255,255,255))
         self.window.blit(linha2, (50, 200))
-        linha3 = fonte.render('APERTE Q PARA ATACAR', 1, (255,255,255))
+        linha3 = fonte.render('APERTE ESPAÇO PARA ATACAR', 1, (255,255,255))
         self.window.blit(linha3, (50, 300))
         ultima_linha = fonte.render('PRESSIONE ENTER PARA COMEÇAR...', 1, (255,255,255))
         self.window.blit(ultima_linha, (50, 600))
@@ -222,16 +222,15 @@ class Inimigos():
         self.window = window
         self.inimigos_iniciais = [
             [
-            (15*50, 10*50),
-            (26*50, 6*50),
-            (50*50, 9*50),
-            (68*50, 10*50),
-            (71*50, 6*50),
-            (89*50, 11*50),
-            (94*50, 8*50) 
-            ],[
-
-            (10*5, 6*50)
+                (15*50, 10*50),
+                (26*50, 6*50),
+                (50*50, 9*50),
+                (68*50, 10*50),
+                (71*50, 6*50),
+                (89*50, 11*50),
+                (94*50, 8*50) 
+            ], [
+                (10*5, 6*50)
             ]
         ]
         self.inimigos = self.inimigos_iniciais[0].copy()

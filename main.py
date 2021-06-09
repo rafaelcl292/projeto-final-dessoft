@@ -81,13 +81,13 @@ def verifica_colisoes():
             personagem.vidas -= 1
         # ataque X flecha
         if personagem.atacando and personagem.contador_ataque < 12:
-            ataque = pygame.Rect(personagem.posicao_x + 40, personagem.posicao_y, personagem.largura + 20, personagem.altura)
+            ataque = pygame.Rect(personagem.posicao_x + 40 + personagem.correcao_flip*3/4, personagem.posicao_y, personagem.largura + 20, personagem.altura)
             if hitbox_flecha.colliderect(ataque):
                 if flecha in inimigos.flechas:
                     inimigos.flechas.remove(flecha)
     # colisões com inimigos
     for inimigo in inimigos.inimigos:
-        ataque = pygame.Rect(personagem.posicao_x + 40, personagem.posicao_y, personagem.largura + 20, personagem.altura)
+        ataque = pygame.Rect(personagem.posicao_x + 40 + personagem.correcao_flip*3/4, personagem.posicao_y, personagem.largura + 20, personagem.altura)
         hitbox_inimigo = pygame.Rect(inimigo[0] + background.posicao, inimigo[1], 50, 100)
         # ataque X inimigo
         if hitbox_inimigo.colliderect(ataque) and personagem.contador_ataque < 12 and personagem.atacando:
@@ -139,15 +139,15 @@ while background.game:
                 
         # Movimentos no eixo Y
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE or event.key == pygame.K_UP or event.key == pygame.K_w:
+            if event.key == pygame.K_UP or event.key == pygame.K_w:
                 personagem.pulando = True
         elif event.type == pygame.KEYUP:
-            if event.key == pygame.K_SPACE or event.key == pygame.K_UP or event.key == pygame.K_w:
+            if event.key == pygame.K_UP or event.key == pygame.K_w:
                 personagem.pulando = False
         
         # Ataque
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_q:
+            if event.key == pygame.K_SPACE:
                 personagem.atacando = True
 
 
@@ -157,14 +157,14 @@ while background.game:
     # Carrega fases
     if personagem.posicao_x >= 1100 - personagem.largura:
         background.fase += 1
-        inimigos.inimigos = inimigos.inimigos_iniciais[background.fase]
+        inimigos.inimigos = inimigos.inimigos_iniciais[background.fase].copy()
         reset_posicoes()
     # Game Over
     if personagem.posicao_y > 700 or personagem.vidas <= 0:
         background.game_over()
         personagem.vidas = 3
         inimigos.flechas = list()
-        inimigos.inimigos = inimigos.inimigos_iniciais[background.fase]
+        inimigos.inimigos = inimigos.inimigos_iniciais[background.fase].copy()
         reset_posicoes()
     # Background
     background.load()
@@ -175,6 +175,7 @@ while background.game:
     # Vidas
     personagem.load_vidas()
     # Update
+    pygame.draw.rect(window, (255, 0 , 0), pygame.Rect(personagem.posicao_x + 40 + personagem.correcao_flip*3/4, personagem.posicao_y, personagem.largura + 20, personagem.altura))
     pygame.display.update()
     # Clock tick
     clock.tick(30)
