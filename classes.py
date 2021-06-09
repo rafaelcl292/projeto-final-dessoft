@@ -236,7 +236,7 @@ class Inimigos():
                 # (10*5, 6*50)
             ]
         ]
-        self.inimigos = self.inimigos_iniciais[1].copy()
+        self.inimigos = self.inimigos_iniciais[2].copy()
         self.sprites1 = [
             pygame.transform.scale(pygame.image.load('sprites_inimigos/inimigo_arco_0.png'), (50, 100)),
             pygame.transform.scale(pygame.image.load('sprites_inimigos/inimigo_arco_1.png'), (50, 100)),
@@ -320,7 +320,7 @@ class Magos():
 
             ]
         ]
-        self.magos = self.magos_iniciais[1].copy()
+        self.magos = self.magos_iniciais[2].copy()
         self.sprites1 = [
             pygame.transform.scale(pygame.image.load('sprites_inimigos/inimigo_mago_1.png'), (50, 100)),
             pygame.transform.scale(pygame.image.load('sprites_inimigos/inimigo_mago_0.png'), (50, 100)),
@@ -448,8 +448,8 @@ class Boss():
         self.projeteis.append(
             {
                 'direcao': x + background > personagem,
-                'x': x if x + background > personagem else x,
-                'y': y + 30,
+                'x': x + 100 if x + background > personagem else x + 240,
+                'y': y + 70,
             }
         )
     
@@ -477,8 +477,8 @@ class Boss():
         self.projeteis2.append(
             {
                 'direcao': x + background > personagem,
-                'x': x if x + background > personagem else x,
-                'y': y + 30,
+                'x': x if x + background > personagem else x + 350,
+                'y': y + 75,
             }
         )
     
@@ -517,9 +517,9 @@ class Boss():
                         self.window.blit(self.get_sprite('boss parado', posicao_personagem, posicao_background, self.posicao_x), (self.posicao_x + posicao_background, self.posicao_y))
                     elif self.contador < 110:
                         self.window.blit(self.get_sprite('boss telegraph', posicao_personagem, posicao_background, self.posicao_x), (self.posicao_x + posicao_background, self.posicao_y))
-                        if self.contador == 90:
-                            self.lancar_projetil2(posicao_background, posicao_personagem, self.posicao_x, self.posicao_y)
                     elif self.contador < 140:
+                        if self.contador == 110:
+                            self.lancar_projetil2(posicao_background, posicao_personagem, self.posicao_x, self.posicao_y)
                         self.window.blit(self.get_sprite('boss ataque', posicao_personagem, posicao_background, self.posicao_x), (self.posicao_x + posicao_background, self.posicao_y))
                     else:
                         self.contador = 0
@@ -553,7 +553,7 @@ class Boss():
                     elif self.contador < 190:
                         self.window.blit(self.get_sprite('boss parado', posicao_personagem, posicao_background, self.posicao_x), (self.posicao_x + posicao_background, self.posicao_y))
                     else:
-                        self.window.blit(self.get_sprite('boss parado', posicao_personagem, posicao_background, self.posicao_x_teleporte), (self.posicao_x_teleporte + posicao_background, self.posicao_y))
+                        self.window.blit(self.get_sprite('boss parado', posicao_personagem, posicao_background, self.posicao_x), (self.posicao_x + posicao_background, self.posicao_y))
                         self.contador = 0
                         self.atacando = False
                     self.contador += 1
