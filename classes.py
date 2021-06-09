@@ -298,3 +298,87 @@ class Inimigos():
                         'y': y + 22
                     }
                 )
+
+
+class Magos():
+    def __init__(self, window):
+        self.window = window
+        self.magos_iniciais = [
+            [
+                # magos fase 1
+
+            ], [
+                # magos fase 2
+                (15*50, 10*50),
+            ], [
+                # inimigos fase 3
+
+            ]
+        ]
+        self.magos = self.magos_iniciais[0].copy()
+        self.sprites1 = [
+            pygame.transform.scale(pygame.image.load('sprites_inimigos/inimigo_mago_1.png'), (50, 100)),
+            pygame.transform.scale(pygame.image.load('sprites_inimigos/inimigo_mago_0.png'), (50, 100)),
+        ]
+        self.sprites2 = [
+            pygame.transform.flip(self.sprites1[0], True, False),
+            pygame.transform.flip(self.sprites1[1], True, False),
+        ]
+        self.contador = 0
+        self.magias = list()
+    
+
+    def magia(self, direcao):
+        if direcao:
+            if int(self.contador/10) % 2 == 0:
+                return pygame.transform.scale(pygame.image.load('projeteis/magia1.png'), (46, 20))
+            else:
+                return pygame.transform.scale(pygame.image.load('projeteis/magia2.png'), (46, 20))
+        if int(self.contador/10) % 2 == 0:
+            return pygame.transform.flip(pygame.transform.scale(pygame.image.load('projeteis/magia1.png'), (46, 20)), True, False)
+        else:
+            return pygame.transform.flip(pygame.transform.scale(pygame.image.load('projeteis/magia2.png'), (46, 20)), True, False)
+
+
+    def load(self, background, personagem):
+        # load magos
+        for x, y in self.magos:
+            if x + background > personagem:
+                sprite = self.sprites2
+            else:
+                sprite = self.sprites1
+            if self.contador < 40:
+                self.window.blit(sprite[0], (x + background, y))
+            else:
+                self.window.blit(sprite[1], (x + background, y))
+        # load magias
+        magias = list()
+        for magia in self.magias:
+            magia_atualizada = dict()
+            magia_atualizada['x'] = magia['x'] - (int(magia['direcao']) * 2 - 1) * 8
+            magia_atualizada['y'] = magia['y']
+            magia_atualizada['direcao'] = magia['direcao']
+            magias.append(magia_atualizada)
+        self.magias = magias
+        for magia in self.magias:
+            self.window.blit(self.magia(magia['direcao']), (magia['x'] + background, magia['y']))
+        # remove magias fora da tela
+        magias_para_remover = []
+        for magia in self.magias:
+            if not (- 46 < magia['x'] + background < 1200):
+                magias_para_remover.append(magia)
+        for magia in magias_para_remover:
+            self.magias.remove(magia)
+
+        self.contador += 1
+        if self.contador == 80:
+            self.contador = 0
+            # nova magia
+            for x, y in self.magos:
+                self.magias.append(
+                    {
+                        'direcao': x + background > personagem,
+                        'x': x - 10 if x + background > personagem else x + 40,
+                        'y': y + 30
+                    }
+                )
