@@ -49,36 +49,33 @@ class Background():
                 [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],  # y = 650
             ],[
                 # fase 3
-                [0]*100,  # y = 0
-                [0]*100,  # y = 50
-                [0]*100,  # y = 100
-                [0]*100,  # y = 150
-                [0]*100,  # y = 200
-                [0]*100,  # y = 250
-                [0]*100,  # y = 300
-                [0]*100,  # y = 350
-                [0]*100,  # y = 400
-                [0]*100,  # y = 450
-                [0]*100,  # y = 500
-                [0]*100,  # y = 550
-                [0]*100,  # y = 600
-                [0]*100,  # y = 650
+                [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],  # y = 0
+                [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],  # y = 50
+                [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],  # y = 100
+                [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],  # y = 150
+                [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],  # y = 200
+                [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],  # y = 250
+                [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],  # y = 300
+                [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],  # y = 350
+                [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],  # y = 400
+                [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],  # y = 450
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],  # y = 500
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],  # y = 550
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],  # y = 600
+                [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],  # y = 650
             ],
         ]
-        self.plano2 = [self.tiles['montanha'], self.tiles['caverna']]
+        self.plano2 = [self.tiles['montanha'], self.tiles['caverna'], self.tiles['caverna']]
         self.block_address_index = [
             [None, self.tiles['grama'], self.tiles['terra']],  # fase 1
             [None, self.tiles['chão caverna']],  # fase 2
-            [None],  # fase 3
-            [None],  # fase 4
-            [None],  # fase 5
+            [None, self.tiles['chão caverna']],  # fase 3
         ]
         self.blocos_solidos = [
             [1, 2],  # fase 1
             [1],  # fase 2
-            [],  # fase 3
-            [],  # fase 4
-            [],  # fase 5
+            [1],  # fase 3
+
 
         ]
         self.game = True
@@ -136,7 +133,7 @@ class Background():
         self.window.blit(linha1,(50,50))
 
         fonte = pygame.font.Font('Fonte.ttf', 64)
-        linha2 = fonte.render('USE AS SETAS OU WASD PARE SE MOVIMENTAR', 1, (255,255,255))
+        linha2 = fonte.render('USE AS SETAS OU W A S D PARE SE MOVIMENTAR', 1, (255,255,255))
         self.window.blit(linha2, (50, 200))
         linha3 = fonte.render('APERTE ESPAÇO PARA ATACAR', 1, (255,255,255))
         self.window.blit(linha3, (50, 300))
@@ -186,6 +183,7 @@ class Personagem():
         self.contador_ataque = 0
         self.vidas = 3
         self.vida = pygame.transform.scale(pygame.image.load('sprites_player/heart.png'), (50, 50))
+        # self.som_espada = pygame.mixer.Sound('sons/espada_puxando.mp3')
     
 
     def load(self):
@@ -202,6 +200,8 @@ class Personagem():
         self.posicao_x += self.velocidade_x
         self.posicao_y += self.velocidade_y
         if self.atacando:
+            # if self.contador_ataque == 0:
+            #     self.som_espada.play()
             if self.contador_ataque == 18:
                 self.atacando = False
                 self.contador_ataque = 0
@@ -222,6 +222,7 @@ class Inimigos():
         self.window = window
         self.inimigos_iniciais = [
             [
+                # inimigos fase 1
                 (15*50, 10*50),
                 (26*50, 6*50),
                 (50*50, 9*50),
@@ -230,7 +231,10 @@ class Inimigos():
                 (89*50, 11*50),
                 (97*50, 4*50) 
             ], [
-                (10*5, 6*50)
+                # inimigos fase 2
+            ], [
+                # inimigos fase 3
+                # (10*5, 6*50)
             ]
         ]
         self.inimigos = self.inimigos_iniciais[0].copy()

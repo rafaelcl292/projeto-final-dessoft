@@ -155,13 +155,14 @@ while background.game:
     verifica_colisoes()
 
     # Carrega fases
-    if personagem.posicao_x >= 1100 - personagem.largura:
+    if personagem.posicao_x >= 1200 - personagem.largura:
         background.fase += 1
         inimigos.inimigos = inimigos.inimigos_iniciais[background.fase].copy()
         reset_posicoes()
     # Game Over
     if personagem.posicao_y > 700 or personagem.vidas <= 0:
         background.game_over()
+        background.fase = 0
         personagem.vidas = 3
         inimigos.flechas = list()
         inimigos.inimigos = inimigos.inimigos_iniciais[background.fase].copy()
@@ -175,7 +176,6 @@ while background.game:
     # Vidas
     personagem.load_vidas()
     # Update
-    # pygame.draw.rect(window, (255, 0 , 0), pygame.Rect(personagem.posicao_x + 40 + personagem.correcao_flip*3/4, personagem.posicao_y, personagem.largura + 20, personagem.altura))
     pygame.display.update()
     # Clock tick
     clock.tick(30)
