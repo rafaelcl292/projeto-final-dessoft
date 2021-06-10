@@ -8,7 +8,9 @@
 ## Jogo - 'This is Impossible'
 Consiste em um jogo de plataforma no qual o jogador tem como objetivo derrotar o boss final.
 
-https://www.youtube.com/watch?v=bDrfCj4dJas
+Parte 1: https://www.youtube.com/watch?v=aoFHvXFwK6w
+
+Parte 2: https://www.youtube.com/watch?v=VmBDn4KnyJc
 
 ![image](https://user-images.githubusercontent.com/81188660/121454698-a9af5d00-c979-11eb-9559-99988afd6582.png)
 
