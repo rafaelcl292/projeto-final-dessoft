@@ -212,7 +212,7 @@ class Personagem():
         self.contador_ataque = 0
         self.vidas = 3
         self.vida = pygame.transform.scale(pygame.image.load('sprites_player/heart.png'), (50, 50))
-        # self.som_espada = pygame.mixer.Sound('sons/espada_puxando.mp3')
+        self.som_espada = pygame.mixer.Sound('sons/espada_puxando.mp3')
     
 
     def load(self):
@@ -225,8 +225,8 @@ class Personagem():
         self.posicao_x += self.velocidade_x
         self.posicao_y += self.velocidade_y
         if self.atacando:
-            # if self.contador_ataque == 0:
-            #     self.som_espada.play()
+            if self.contador_ataque == 0:
+                self.som_espada.play()
             if self.contador_ataque == 18:
                 self.atacando = False
                 self.contador_ataque = 0
@@ -549,12 +549,12 @@ class Boss():
                     self.correcao_teleporte = self.posicao_x - self.posicao_x_teleporte
             else:
                 if self.ataque == 'espadada':
-                    if self.contador < 90:
+                    if self.contador < 40:
                         self.window.blit(self.get_sprite('boss parado', posicao_personagem, posicao_background, self.posicao_x), (self.posicao_x + posicao_background, self.posicao_y))
-                    elif self.contador < 110:
+                    elif self.contador < 70:
                         self.window.blit(self.get_sprite('boss telegraph', posicao_personagem, posicao_background, self.posicao_x), (self.posicao_x + posicao_background, self.posicao_y))
-                    elif self.contador < 140:
-                        if self.contador == 110:
+                    elif self.contador < 100:
+                        if self.contador == 70:
                             self.espetada = True
                             self.lancar_projetil2(posicao_background, posicao_personagem, self.posicao_x, self.posicao_y)
                         self.window.blit(self.get_sprite('boss ataque', posicao_personagem, posicao_background, self.posicao_x), (self.posicao_x + posicao_background, self.posicao_y))
@@ -564,12 +564,12 @@ class Boss():
                         self.atacando = False
                     self.contador += 1
                 elif self.ataque == 'magia':
-                    if self.contador < 90:
+                    if self.contador < 40:
                         self.window.blit(self.get_sprite('boss parado', posicao_personagem, posicao_background, self.posicao_x), (self.posicao_x + posicao_background, self.posicao_y))
-                    elif self.contador < 110:
+                    elif self.contador < 70:
                         self.window.blit(self.get_sprite('boss magia 1', posicao_personagem, posicao_background, self.posicao_x), (self.posicao_x + posicao_background, self.posicao_y))
-                    elif self.contador < 150:
-                        if self.contador == 110:
+                    elif self.contador < 100:
+                        if self.contador == 70:
                             self.lancar_projetil(posicao_background, posicao_personagem, self.posicao_x, self.posicao_y)
                         self.window.blit(self.get_sprite('boss magia 2', posicao_personagem, posicao_background, self.posicao_x), (self.posicao_x + posicao_background, self.posicao_y))
                     else:
@@ -577,18 +577,18 @@ class Boss():
                         self.atacando = False
                     self.contador += 1
                 elif self.ataque == 'teleporte':
-                    if self.contador < 90:
+                    if self.contador < 40:
                         self.window.blit(self.get_sprite('boss parado', posicao_personagem, posicao_background, self.posicao_x_teleporte), (self.posicao_x_teleporte + posicao_background, self.posicao_y))
-                    elif self.contador < 110:
+                    elif self.contador < 70:
                         self.window.blit(self.get_sprite('teleporte 1', posicao_personagem, posicao_background, self.posicao_x_teleporte), (self.posicao_x_teleporte + posicao_background, self.posicao_y))
                         self.window.blit(self.get_sprite('teleporte 3', posicao_personagem, posicao_background, self.posicao_x), (self.posicao_x + posicao_background, self.posicao_y))
-                    elif self.contador < 150:
-                        if self.contador == 110:
+                    elif self.contador < 100:
+                        if self.contador == 70:
                             self.teleportando = True
                         self.window.blit(self.get_sprite('teleporte 2', posicao_personagem, posicao_background, self.posicao_x_teleporte), (self.posicao_x_teleporte + posicao_background, self.posicao_y))
                         self.window.blit(self.get_sprite('teleporte 2', posicao_personagem, posicao_background, self.posicao_x), (self.posicao_x + posicao_background, self.posicao_y))
-                    elif self.contador < 190:
-                        if self.contador == 150:
+                    elif self.contador < 130:
+                        if self.contador == 100:
                             self.teleportando = False
                             self.correcao_teleporte = 0
                         self.window.blit(self.get_sprite('teleporte 3', posicao_personagem, posicao_background, self.posicao_x_teleporte), (self.posicao_x_teleporte + posicao_background, self.posicao_y))
