@@ -213,8 +213,10 @@ class Personagem():
         self.vidas = 3
         self.vida = pygame.transform.scale(pygame.image.load('sprites_player/heart.png'), (50, 50))
         self.som_espada = pygame.mixer.Sound('sons/espada_puxando.mp3')
-        self.som_game_over = pygame.mixer.Sound('')
-        pygame.mixer.music.load('sons/paripapa.mp3')
+        self.som_espada.set_volume(0.07)
+        # self.som_game_over = pygame.mixer.Sound('')
+        pygame.mixer.music.load('sons/musica_de_fundo.mp3')
+        pygame.mixer.music.set_volume(0.07)
         pygame.mixer.music.play(loops = -1)
         
     
