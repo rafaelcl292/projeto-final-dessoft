@@ -74,6 +74,16 @@ def verifica_colisoes():
                     hitbox_magia = pygame.Rect(magia['x'] + background.posicao, magia['y'], 46, 20)
                     if hitbox_magia.colliderect(parede):
                         magos.magias.remove(magia)
+                # ambiente X magia boss
+                for magia_boss in boss.projeteis:
+                    hitbox_magia_boss = pygame.Rect(magia_boss['x'] + background.posicao, magia_boss['y'], 60, 34)
+                    if hitbox_magia_boss.colliderect(parede):
+                        boss.projeteis.remove(magia_boss)
+                # ambiente X projetil boss
+                for projetil_boss in boss.projeteis2:
+                    hitbox_projetil_boss = pygame.Rect(projetil_boss['x'] + background.posicao, projetil_boss['y'], 30, 21)
+                    if hitbox_projetil_boss.colliderect(parede):
+                        boss.projeteis2.remove(projetil_boss)
             x += 50
         x = 0
         y += 50
@@ -86,13 +96,13 @@ def verifica_colisoes():
             personagem.vidas -= 1
         # ataque X flecha
         if personagem.atacando and personagem.contador_ataque < 12:
-            ataque = pygame.Rect(personagem.posicao_x + 70 + personagem.correcao_flip, personagem.posicao_y, personagem.largura + 20, personagem.altura + 20)
+            ataque = pygame.Rect(personagem.posicao_x + 70 + personagem.correcao_flip, personagem.posicao_y, personagem.largura + 20, personagem.altura + 40)
             if hitbox_flecha.colliderect(ataque):
                 if flecha in inimigos.flechas:
                     inimigos.flechas.remove(flecha)
     # colisões com inimigos
     for inimigo in inimigos.inimigos:
-        ataque = pygame.Rect(personagem.posicao_x + 70 + personagem.correcao_flip, personagem.posicao_y, personagem.largura + 20, personagem.altura + 20)
+        ataque = pygame.Rect(personagem.posicao_x + 70 + personagem.correcao_flip, personagem.posicao_y, personagem.largura + 20, personagem.altura + 40)
         hitbox_inimigo = pygame.Rect(inimigo[0] + background.posicao, inimigo[1], 50, 100)
         # ataque X inimigo
         if hitbox_inimigo.colliderect(ataque) and personagem.contador_ataque < 12 and personagem.atacando:
@@ -106,11 +116,63 @@ def verifica_colisoes():
             personagem.vidas -= 1
     # colisões com magos
     for mago in magos.magos:
-        ataque = pygame.Rect(personagem.posicao_x + 70 + personagem.correcao_flip, personagem.posicao_y, personagem.largura + 20, personagem.altura + 20)
+        ataque = pygame.Rect(personagem.posicao_x + 70 + personagem.correcao_flip, personagem.posicao_y, personagem.largura + 20, personagem.altura + 40)
         hitbox_mago = pygame.Rect(mago[0] + background.posicao, mago[1], 50, 100)
         # ataque X mago
         if hitbox_mago.colliderect(ataque) and personagem.contador_ataque < 12 and personagem.atacando:
             magos.magos.remove(mago)
+    if background.fase == 2:
+        # colisões com magia boss
+        for magia_boss in boss.projeteis:
+            # player X magia boss
+            hitbox_magia_boss = pygame.Rect(magia_boss['x'] + background.posicao, magia_boss['y'], 60, 34)
+            if hitbox_magia_boss.colliderect(player_atual):
+                boss.projeteis.remove(magia_boss)
+                personagem.vidas -= 1
+        # colisões com projetil boss
+        for projetil_boss in boss.projeteis2:
+            # player X flecha
+            hitbox_projetil_boss = pygame.Rect(projetil_boss['x'] + background.posicao, projetil_boss['y'], 30, 21)
+            if hitbox_projetil_boss.colliderect(player_atual):
+                boss.projeteis2.remove(projetil_boss)
+                personagem.vidas -= 1
+            # ataque X flecha
+            if personagem.atacando and personagem.contador_ataque < 12:
+                ataque = pygame.Rect(personagem.posicao_x + 70 + personagem.correcao_flip, personagem.posicao_y, personagem.largura + 20, personagem.altura + 40)
+                if hitbox_projetil_boss.colliderect(ataque):
+                    if projetil_boss in boss.projeteis2:
+                        boss.projeteis2.remove(projetil_boss)
+        # colisões com o boss
+        boss.contador_colisao_player += 1
+        boss.contador_colisao_boss += 1
+        if boss.teleportando == False:
+            ataque = pygame.Rect(personagem.posicao_x + 70 + personagem.correcao_flip, personagem.posicao_y, personagem.largura + 20, personagem.altura + 40)
+            hitbox_boss = pygame.Rect(boss.posicao_x + background.posicao - boss.correcao_teleporte + 180, boss.posicao_y + 50, 50, 120)
+            # player X boss
+            if hitbox_boss.colliderect(player_futuro_x):
+                personagem.velocidade_x = 0
+                background.velocidade = 0
+                if boss.contador_colisao_player > 20:
+                    boss.contador_colisao_player = 0
+                    personagem.vidas -= 1
+            if hitbox_boss.colliderect(player_futuro_y):
+                personagem.velocidade_y = hitbox_boss.top - player_atual.bottom
+                if boss.contador_colisao_player > 20:
+                    boss.contador_colisao_player = 0
+                    personagem.vidas -= 1
+            # ataque X boss
+            if hitbox_boss.colliderect(ataque) and personagem.atacando:
+                if boss.contador_colisao_boss > 20:
+                    boss.contador_colisao_boss = 0
+                    boss.vidas -= 1
+            # ataque boss X player
+            if boss.espetada:
+                ataque_boss_hitbox = pygame.Rect(boss.posicao_x + background.posicao + 40, boss.posicao_y + 60, 360, 40)
+                if player_atual.colliderect(ataque_boss_hitbox):
+                    if boss.contador_colisao_player > 20:
+                        boss.contador_colisao_player = 0
+                        personagem.vidas -= 1
+
 
 
 def reset_posicoes():
@@ -123,6 +185,10 @@ def reset_posicoes():
     personagem.direita = False
     personagem.esquerda = False
     personagem.pulando = False
+    boss.projeteis = []
+    boss.projeteis2 = []
+    inimigos.flechas = []
+    magos.magias = []
 
 
 pygame.init()
@@ -151,13 +217,13 @@ while background.game:
                 personagem.esquerda = True
             elif event.key == pygame.K_RIGHT or event.key == pygame.K_d:
                 personagem.direita = True
-                
+               
         elif event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_a:
                 personagem.esquerda = False
             elif event.key == pygame.K_RIGHT or event.key == pygame.K_d:
                 personagem.direita = False
-                
+               
         # Movimentos no eixo Y
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP or event.key == pygame.K_w:
@@ -165,7 +231,7 @@ while background.game:
         elif event.type == pygame.KEYUP:
             if event.key == pygame.K_UP or event.key == pygame.K_w:
                 personagem.pulando = False
-        
+       
         # Ataque
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE or event.key == pygame.K_q:
@@ -186,6 +252,7 @@ while background.game:
         background.game_over()
         background.fase = 0
         personagem.vidas = 3
+        boss.vidas = 7
         inimigos.flechas = list()
         inimigos.inimigos = inimigos.inimigos_iniciais[background.fase].copy()
         magos.magos = magos.magos_iniciais[background.fase].copy()
@@ -195,6 +262,7 @@ while background.game:
         background.vitoria()
         background.fase = 0
         personagem.vidas = 3
+        boss.vidas = 7
         inimigos.flechas = list()
         inimigos.inimigos = inimigos.inimigos_iniciais[background.fase].copy()
         magos.magos = magos.magos_iniciais[background.fase].copy()
