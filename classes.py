@@ -213,6 +213,10 @@ class Personagem():
         self.vidas = 3
         self.vida = pygame.transform.scale(pygame.image.load('sprites_player/heart.png'), (50, 50))
         self.som_espada = pygame.mixer.Sound('sons/espada_puxando.mp3')
+        self.som_game_over = pygame.mixer.Sound('')
+        pygame.mixer.music.load('sons/paripapa.mp3')
+        pygame.mixer.music.play(loops = -1)
+        
     
 
     def load(self):
@@ -225,7 +229,7 @@ class Personagem():
         self.posicao_x += self.velocidade_x
         self.posicao_y += self.velocidade_y
         if self.atacando:
-            if self.contador_ataque == 0:
+            if self.contador_ataque == 1:
                 self.som_espada.play()
             if self.contador_ataque == 18:
                 self.atacando = False
