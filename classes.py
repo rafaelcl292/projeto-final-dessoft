@@ -124,6 +124,36 @@ class Background():
                         return
     
 
+    def vitoria(self):
+        # implemantar música de vitoria
+        self.window.fill((0, 0, 0))
+        pygame.font.init()
+        fonte = pygame.font.Font('Fonte.ttf', 128)
+        linha1 = fonte.render('PARABÉNS!!', 1, (200, 0, 0))
+        self.window.blit(linha1, (600, 100))
+
+        fonte = pygame.font.Font('Fonte.ttf', 64)
+        linha2 = fonte.render('POUCOS SÃO CAPAZES DE VENCER THIS IS IMPOSSIBLE', 1, (255,255,255))
+        self.window.blit(linha2, (50, 400))
+        penultima_linha = fonte.render('PRESSIONE S PARA SAIR', 1, (255,255,255))
+        self.window.blit(penultima_linha, (50, 500))
+        ultima_linha = fonte.render('PRESSIONE ENTER PARA JOGAR DENOVO...', 1, (255,255,255))
+        self.window.blit(ultima_linha, (50, 600))
+
+        pygame.display.update()
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    self.game = False
+                    return
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_RETURN:
+                        return
+                    if event.key == pygame.K_s:
+                        self.game = False
+                        return
+    
+
     def tela_inicio(self):
         # fazer tela de início com instrucões básicas de jogo
         self.window.fill((0, 0, 0))

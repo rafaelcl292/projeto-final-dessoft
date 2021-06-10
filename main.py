@@ -255,6 +255,15 @@ while background.game:
         inimigos.inimigos = inimigos.inimigos_iniciais[background.fase].copy()
         magos.magos = magos.magos_iniciais[background.fase].copy()
         reset_posicoes()
+    # Vitória
+    if boss.vidas <= 0:
+        background.vitoria()
+        background.fase = 0
+        personagem.vidas = 3
+        inimigos.flechas = list()
+        inimigos.inimigos = inimigos.inimigos_iniciais[background.fase].copy()
+        magos.magos = magos.magos_iniciais[background.fase].copy()
+        reset_posicoes()
     # Background
     background.load()
     # Inimigos
